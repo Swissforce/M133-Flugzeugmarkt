@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Flugzeugmarkt:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Flugzeugmarkt</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Flugzeugmarkt-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Flugzeugmarkt:war exploded" />
+    </root>
+  </artifact>
+</component>
