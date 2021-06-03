@@ -26,6 +26,7 @@ public class Airline {
     public Airline(String name, String gruendungsdatum){
         this.name = name;
         this.gruendungsdatum = gruendungsdatum;
+        flugzeuge = new Vector<>();
     }
 
     /**
@@ -34,13 +35,14 @@ public class Airline {
      */
     public Airline(String name){
         this.name = name;
+        flugzeuge = new Vector<>();
     }
 
     /**
      * leerer Konstruktor
      */
     public Airline(){
-
+        flugzeuge = new Vector<>();
     }
 
 
@@ -93,8 +95,8 @@ public class Airline {
         }
     }
 
-    //Methoden
 
+    //Methoden
 
     /**
      * aktualisiert ein, mit Index spezifiziertes, Flugzeug vom Vector flugzeuge.

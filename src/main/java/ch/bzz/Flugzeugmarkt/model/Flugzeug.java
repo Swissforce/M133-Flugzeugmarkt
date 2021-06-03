@@ -13,6 +13,7 @@ public class Flugzeug {
     private String registrationsnummer;
     private String herstellungsdatum;
 
+
     //Konstruktoren
 
     /**
@@ -51,6 +52,7 @@ public class Flugzeug {
     public Flugzeug(){
 
     }
+
 
     // Getter & Setter
 
@@ -101,6 +103,5 @@ public class Flugzeug {
     public void setHerstellungsdatum(String herstellungsdatum) {
         this.herstellungsdatum = herstellungsdatum;
     }
-
 
 }
