@@ -1,5 +1,6 @@
 package ch.bzz.Flugzeugmarkt.model;
 
+import java.util.UUID;
 import java.util.Vector;
 
 /**
@@ -12,8 +13,9 @@ import java.util.Vector;
 
 public class Airline {
     private String name;
+    private String airlineUUID;
     private String gruendungsdatum;
-    private Vector<Flugzeug> flugzeuge;
+    private Vector <Flugzeug> flugzeuge;
 
 
     //Konstruktoren
@@ -21,27 +23,48 @@ public class Airline {
     /**
      * ausführlicher Konstruktor
      * @param name
+     * @param airlineUUID
      * @param gruendungsdatum
+     * @throws IllegalArgumentException
      */
-    public Airline(String name, String gruendungsdatum){
-        this.name = name;
-        this.gruendungsdatum = gruendungsdatum;
+    public Airline(String name, String airlineUUID, String gruendungsdatum) throws IllegalArgumentException{
+        setName(name);
+        setAirlineUUID(airlineUUID);
+        setGruendungsdatum(gruendungsdatum);
+
         flugzeuge = new Vector<>();
     }
 
     /**
-     * minimalistischer Konstruktor
+     * Konstruktor ohne Gründungsdatum
+     * @param name
+     * @param airlineUUID
+     * @throws IllegalArgumentException
+     */
+    public Airline(String name, String airlineUUID) throws IllegalArgumentException{
+        setName(name);
+        setAirlineUUID(airlineUUID);
+
+        flugzeuge = new Vector<>();
+    }
+
+    /**
+     * Konstruktor nur mit Name. Setzt UUID zufällig
      * @param name
      */
     public Airline(String name){
-        this.name = name;
+        setName(name);
+        setAirlineUUID(UUID.randomUUID().toString());
+
         flugzeuge = new Vector<>();
     }
 
     /**
-     * leerer Konstruktor
+     * leerer Konstruktor, Setzt UUID zufällig
      */
     public Airline(){
+        setAirlineUUID(UUID.randomUUID().toString());
+
         flugzeuge = new Vector<>();
     }
 
@@ -95,6 +118,25 @@ public class Airline {
         }
     }
 
+    /**
+     * gibt die UUID als String zurück
+     * @return airlineUUID
+     */
+    public String getAirlineUUID() {
+        return airlineUUID;
+    }
+
+    /**
+     * setzt die UUID. Throws IllegalArgumentException, wenn die UUID formal inkorrekt ist.
+     * @param airlineUUID
+     * @throws IllegalArgumentException
+     */
+    public void setAirlineUUID(String airlineUUID) throws IllegalArgumentException{
+        UUID.fromString(airlineUUID);   /*Testet, ob die UUID formal korrekt ist.
+                                          Sonst schmeisst es automatisch IllegalArgumentException*/
+        this.airlineUUID = airlineUUID;
+    }
+
 
     //Methoden
 
@@ -116,6 +158,27 @@ public class Airline {
     }
 
     /**
+     * aktualisiert ein, mit UUID spezifiziertes, Flugzeug vom Vector flugzeuge.
+     * Dies geschieht, indem das alte Flugzeugobjekt mit einem neuen ersetzt wird.
+     * Wenn kein Flugzeug mit der UUID im Vector vorhanden ist, dann throw IllegalArgumentException.
+     * @param flugzeug
+     * @param flugzeugUUID
+     * @throws IllegalArgumentException
+     */
+    public void updateFlugzeug(Flugzeug flugzeug, String flugzeugUUID) throws IllegalArgumentException{
+        boolean existiert = false;
+        for(Flugzeug x : flugzeuge){
+            if (x.getFlugzeugUUID() == flugzeugUUID){           //Schaut ob ein Flugzeug mit dieser UUID existiert
+                flugzeuge.set(flugzeuge.indexOf(x),flugzeug);
+                existiert = true;
+            }
+        }
+        if (!existiert){
+            throw new IllegalArgumentException();
+        }
+    }
+
+    /**
      * entfernt ein Flugzeug vom Vector flugzeuge, mithilfe des Indexes
      * Wenn der Index out of bounds ist, wird diese Exception in eine IllegalArgumentException umgewandelt.
      * @param index
@@ -131,7 +194,7 @@ public class Airline {
     }
 
     /**
-     * entfernt ein Flugzeug vom Vector flugzeuge, mithilfe der Objektes
+     * entfernt ein Flugzeug vom Vector flugzeuge, mithilfe des Objektes
      * Wenn das Objekt nicht im Vector flugzeuge vorhanden ist, schmeisst es eine IllegalArgumentException
      * @param flugzeug
      * @throws IllegalArgumentException
@@ -144,6 +207,25 @@ public class Airline {
             throw new IllegalArgumentException();
         }
 
+    }
+
+    /**
+     * entfernt ein Flugzeug vom Vector flugzeuge, mithilfe der UUID
+     * Wenn kein Flugzeug mit der UUID im Vector flugzeuge vorhanden ist, schmeisst es eine IllegalArgumentException
+     * @param flugzeugUUID
+     * @throws IllegalArgumentException
+     */
+    public void rmFlugzeug(String flugzeugUUID) throws IllegalArgumentException{
+        boolean existiert = false;
+        for(Flugzeug x : flugzeuge){
+            if (x.getFlugzeugUUID() == flugzeugUUID){           //Schaut ob ein Flugzeug mit dieser UUID existiert
+                flugzeuge.remove(x);
+                existiert = true;
+            }
+        }
+        if (!existiert){
+            throw new IllegalArgumentException();
+        }
     }
 
 

@@ -1,5 +1,7 @@
 package ch.bzz.Flugzeugmarkt.model;
 
+import java.util.UUID;
+
 /**
  * Model des Flugzeugs
  *
@@ -10,7 +12,7 @@ package ch.bzz.Flugzeugmarkt.model;
 
 public class Flugzeug {
     private String flugzeugtyp;
-    private String registrationsnummer;
+    private String flugzeugUUID;
     private String herstellungsdatum;
 
 
@@ -19,38 +21,41 @@ public class Flugzeug {
     /**
      * ausführlicher Konstruktor
      * @param flugzeugtyp
-     * @param registrationsnummer
+     * @param flugzeugUUID
      * @param herstellungsdatum
+     * @throws IllegalArgumentException
      */
-    public Flugzeug(String flugzeugtyp, String registrationsnummer, String herstellungsdatum){
+    public Flugzeug(String flugzeugtyp, String flugzeugUUID, String herstellungsdatum) throws IllegalArgumentException{
         setFlugzeugtyp(flugzeugtyp);
-        setRegistrationsnummer(registrationsnummer);
+        setFlugzeugUUID(flugzeugUUID);
         setHerstellungsdatum(herstellungsdatum);
     }
 
     /**
      * Konstruktor ohne herstellungsdatum
      * @param flugzeugtyp
-     * @param registrationsnummer
+     * @param flugzeugUUID
+     * @throws IllegalArgumentException
      */
-    public Flugzeug(String flugzeugtyp, String registrationsnummer){
+    public Flugzeug(String flugzeugtyp, String flugzeugUUID)throws IllegalArgumentException{
         setFlugzeugtyp(flugzeugtyp);
-        setRegistrationsnummer(registrationsnummer);
+        setFlugzeugUUID(flugzeugUUID);
     }
 
     /**
-     * minimalistischer Konstruktor
+     * minimalistischer Konstruktor, setzt automatisch eine zufällige UUID
      * @param flugzeugtyp
      */
     public Flugzeug(String flugzeugtyp){
         setFlugzeugtyp(flugzeugtyp);
+        setFlugzeugUUID(UUID.randomUUID().toString());
     }
 
     /**
-     * leerer Konstruktor
+     * leerer Konstruktor, setzt automatisch eine zufällige UUID
      */
     public Flugzeug(){
-
+        setFlugzeugUUID(UUID.randomUUID().toString());
     }
 
 
@@ -76,16 +81,19 @@ public class Flugzeug {
      * gibt die Registrationsnummer
      * @return registrationsnummer
      */
-    public String getRegistrationsnummer() {
-        return registrationsnummer;
+    public String getFlugzeugUUID() {
+        return flugzeugUUID;
     }
 
     /**
-     * setzt die Registrationsnummer
-     * @param registrationsnummer
+     * setzt die Registrationsnummer und überprüft diese formal
+     * @param flugzeugUUID
+     * @throws IllegalArgumentException
      */
-    public void setRegistrationsnummer(String registrationsnummer) {
-        this.registrationsnummer = registrationsnummer;
+    public void setFlugzeugUUID(String flugzeugUUID) throws IllegalArgumentException{
+        UUID.fromString(flugzeugUUID);  /*Testet, ob die UUID formal korrekt ist.
+                                          Sonst schmeisst es automatisch IllegalArgumentException*/
+        this.flugzeugUUID = flugzeugUUID;
     }
 
     /**
