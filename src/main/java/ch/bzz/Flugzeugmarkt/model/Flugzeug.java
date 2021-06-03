@@ -45,6 +45,12 @@ public class Flugzeug {
         setFlugzeugtyp(flugzeugtyp);
     }
 
+    /**
+     * leerer Konstruktor
+     */
+    public Flugzeug(){
+
+    }
 
     // Getter & Setter
 
