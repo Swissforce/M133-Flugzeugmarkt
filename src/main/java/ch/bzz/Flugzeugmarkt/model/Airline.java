@@ -1,10 +1,12 @@
 package ch.bzz.Flugzeugmarkt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.UUID;
 import java.util.Vector;
 
 /**
- * Model der Airline
+ * Modelklasse der Airline
  *
  * @author Martin Düppenbecker
  * @version 1.0
@@ -15,6 +17,7 @@ public class Airline {
     private String name;
     private String airlineUUID;
     private String gruendungsdatum;
+    @JsonIgnore
     private Vector <Flugzeug> flugzeuge;
 
 
@@ -228,6 +231,13 @@ public class Airline {
         }
     }
 
+    /**
+     * Fügt ein Flugzeug zum Vector hinzu
+     * @param flugzeug
+     */
+    public void addFlugzeug(Flugzeug flugzeug){
+        flugzeuge.add(flugzeug);
+    }
 
     //TODO Methode für den Kauf von Flugzeugen über den Hersteller
 }

@@ -1,10 +1,12 @@
 package ch.bzz.Flugzeugmarkt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.UUID;
 import java.util.Vector;
 
 /**
- * Beschreibung der Klasse
+ * Modelklasse des Herstellers
  *
  * @author Martin Düppenbecker
  * @version 1.0
@@ -15,6 +17,7 @@ public class Hersteller {
     private String name;
     private String herstellerUUID;
     private String gruendungsdatum;
+    @JsonIgnore
     private Vector <Flugzeug> zuverkaufendeFlugzeuge;
 
 
@@ -127,6 +130,14 @@ public class Hersteller {
 
 
     //Methoden
+
+    /**
+     * fügt dem Vector ein neues Flugzeug hinzu
+     * @param flugzeug
+     */
+    public void addZuverkaufendeFlugzeuge(Flugzeug flugzeug){
+        zuverkaufendeFlugzeuge.add(flugzeug);
+    }
 
     //TODO
 }

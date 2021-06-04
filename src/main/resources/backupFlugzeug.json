@@ -1,0 +1,32 @@
+[
+  {
+    "hersteller": {
+      "name": "Boeing",
+      "herstellerUUID": "914312a7-c0d7-42c2-905b-7dd8332cf6c9",
+      "gruendungsdatum": "1916"
+    },
+    "airline": {
+      "name": "Swiss",
+      "airlineUUID": "1bf5dca5-4f25-4225-aff8-c7b5de868ea1",
+      "gruendungsdatum": "2002"
+    },
+    "flugzeugtyp": "777-300ER",
+    "flugzeugUUID": "4efd4ee9-1e3e-47cc-a919-93194c5137cd",
+    "herstellungsdatum": "2017"
+  },
+  {
+    "hersteller": {
+      "name": "Airbus",
+      "herstellerUUID": "1a8b4702-59d8-4a22-927a-0d1c9713bba1",
+      "gruendungsdatum": "1970"
+    },
+    "airline": {
+      "name": "Swiss",
+      "airlineUUID": "1bf5dca5-4f25-4225-aff8-c7b5de868ea1",
+      "gruendungsdatum": "2002"
+    },
+    "flugzeugtyp": "A320neo",
+    "flugzeugUUID": "c3effae4-81e2-4a94-b8f3-48f43c998630",
+    "herstellungsdatum": "2020"
+  }
+]

@@ -3,7 +3,7 @@ package ch.bzz.Flugzeugmarkt.model;
 import java.util.UUID;
 
 /**
- * Model des Flugzeugs
+ * Modelklasse des Flugzeugs
  *
  * @author Martin Düppenbecker
  * @version 1.0
@@ -11,6 +11,8 @@ import java.util.UUID;
  */
 
 public class Flugzeug {
+    private Hersteller hersteller;
+    private Airline airline;
     private String flugzeugtyp;
     private String flugzeugUUID;
     private String herstellungsdatum;
@@ -20,12 +22,14 @@ public class Flugzeug {
 
     /**
      * ausführlicher Konstruktor
+     * @param hersteller
      * @param flugzeugtyp
      * @param flugzeugUUID
      * @param herstellungsdatum
      * @throws IllegalArgumentException
      */
-    public Flugzeug(String flugzeugtyp, String flugzeugUUID, String herstellungsdatum) throws IllegalArgumentException{
+    public Flugzeug(Hersteller hersteller, String flugzeugtyp, String flugzeugUUID, String herstellungsdatum) throws IllegalArgumentException{
+        setHersteller(hersteller);
         setFlugzeugtyp(flugzeugtyp);
         setFlugzeugUUID(flugzeugUUID);
         setHerstellungsdatum(herstellungsdatum);
@@ -33,28 +37,34 @@ public class Flugzeug {
 
     /**
      * Konstruktor ohne herstellungsdatum
+     * @param hersteller
      * @param flugzeugtyp
      * @param flugzeugUUID
      * @throws IllegalArgumentException
      */
-    public Flugzeug(String flugzeugtyp, String flugzeugUUID)throws IllegalArgumentException{
+    public Flugzeug(Hersteller hersteller, String flugzeugtyp, String flugzeugUUID) throws IllegalArgumentException{
+        setHersteller(hersteller);
         setFlugzeugtyp(flugzeugtyp);
         setFlugzeugUUID(flugzeugUUID);
     }
 
     /**
-     * minimalistischer Konstruktor, setzt automatisch eine zufällige UUID
+     * Konstruktor mit hersteller und flugzeugtyp, setzt automatisch eine zufällige UUID
+     * @param hersteller
      * @param flugzeugtyp
      */
-    public Flugzeug(String flugzeugtyp){
+    public Flugzeug(Hersteller hersteller, String flugzeugtyp){
+        setHersteller(hersteller);
         setFlugzeugtyp(flugzeugtyp);
         setFlugzeugUUID(UUID.randomUUID().toString());
     }
 
     /**
-     * leerer Konstruktor, setzt automatisch eine zufällige UUID
+     * Konstruktor nur mit hersteller, setzt automatisch eine zufällige UUID
+     * @param hersteller
      */
-    public Flugzeug(){
+    public Flugzeug(Hersteller hersteller){
+        setHersteller(hersteller);
         setFlugzeugUUID(UUID.randomUUID().toString());
     }
 
@@ -112,4 +122,35 @@ public class Flugzeug {
         this.herstellungsdatum = herstellungsdatum;
     }
 
+    /**
+     * gibt den Hersteller zurück
+     * @return hersteller
+     */
+    public Hersteller getHersteller() {
+        return hersteller;
+    }
+
+    /**
+     * setzt den Hersteller
+     * @param hersteller
+     */
+    public void setHersteller(Hersteller hersteller) {
+        this.hersteller = hersteller;
+    }
+
+    /**
+     * gibt die Airline zurück
+     * @return airline
+     */
+    public Airline getAirline() {
+        return airline;
+    }
+
+    /**
+     * setzt die Airline
+     * @param airline
+     */
+    public void setAirline(Airline airline) {
+        this.airline = airline;
+    }
 }
