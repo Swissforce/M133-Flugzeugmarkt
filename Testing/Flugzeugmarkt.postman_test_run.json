@@ -1,0 +1,524 @@
+{
+	"id": "ec94c33a-a5e2-4802-896c-a61c94c6bdc8",
+	"name": "Flugzeugmarkt",
+	"timestamp": "2021-06-05T17:23:16.256Z",
+	"collection_id": "6bc7ee6c-f7d6-4bf7-b0a0-1ee909ae3b9b",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 26,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "36ec06df-9f33-4d55-8033-b270a4295deb",
+			"name": "Test",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/test/test",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "c7153ec7-b1e6-4add-8013-d09df9961a1c",
+			"name": "Test valides JSON",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/testliste",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "8538c2cb-3ab7-4dbf-bb54-8fba4751e4be",
+			"name": "Flugzeug: list",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/list",
+			"time": 28,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				28
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "94ed30dd-f51c-4926-9c0c-8b1edc3d40cf",
+			"name": "Flugzeug: check",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/check?flugzeugUUID=4efd4ee9-1e3e-47cc-a919-93194c5137cd",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "6c37870a-3765-4c34-afc5-573f066456ee",
+			"name": "Flugzeug: check empty",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/check?flugzeugUUID=a1c0bb34-7f7f-41a3-8960-04487f696bc2",
+			"time": 8,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "7285397f-d0e5-46ca-a00f-ede4f58f5b1f",
+			"name": "Flugzeug: check invalid",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/check?flugzeugUUID=a1c0bb34-7f7f-41a3-04487f696bc2",
+			"time": 5,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "2f991121-713e-446c-9a48-424284bc1904",
+			"name": "Airline: list",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/list",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "bfd501cb-fcf4-4d86-ae78-c5a992c3457a",
+			"name": "Airline: check",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/check?airlineUUID=1bf5dca5-4f25-4225-aff8-c7b5de868ea1",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "82595147-43b2-47e6-bea4-466f6dca4812",
+			"name": "Airline: check empty",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/check?airlineUUID=364cce64-2fc7-4b10-8094-fdc10f45eda8",
+			"time": 9,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "a8e018c1-95b2-4a88-b755-da07945a1273",
+			"name": "Airline: check invalid",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/check?airlineUUID=364cce64-2fc7-8094-fdc10f45eda8",
+			"time": 9,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "36dfd4ab-0f48-4c3e-a3e4-9a39aa1f6d5f",
+			"name": "Hersteller: list",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/list",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "d15bd330-6452-4fab-b68a-5f6ba1a8dad8",
+			"name": "Hersteller: check",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/check?herstellerUUID=1a8b4702-59d8-4a22-927a-0d1c9713bba1",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "73525599-2037-4ead-9507-48805f027ff0",
+			"name": "Hersteller: check empty",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/check?herstellerUUID=ed79fa21-4a43-4b85-ba58-18a1e74af0df",
+			"time": 4,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		},
+		{
+			"id": "e61cf60a-7e0f-4f22-84a5-e5b825765c53",
+			"name": "Hersteller: check invalid",
+			"url": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/check?herstellerUUID=ed79-fa21-4a43-4b85-ba58-18a1e74af0df",
+			"time": 6,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status test": true,
+				"validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"validate response": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 130,
+	"collection": {
+		"requests": [
+			{
+				"id": "36ec06df-9f33-4d55-8033-b270a4295deb",
+				"method": "GET"
+			},
+			{
+				"id": "c7153ec7-b1e6-4add-8013-d09df9961a1c",
+				"method": "GET"
+			},
+			{
+				"id": "8538c2cb-3ab7-4dbf-bb54-8fba4751e4be",
+				"method": "GET"
+			},
+			{
+				"id": "94ed30dd-f51c-4926-9c0c-8b1edc3d40cf",
+				"method": "GET"
+			},
+			{
+				"id": "6c37870a-3765-4c34-afc5-573f066456ee",
+				"method": "GET"
+			},
+			{
+				"id": "7285397f-d0e5-46ca-a00f-ede4f58f5b1f",
+				"method": "GET"
+			},
+			{
+				"id": "2f991121-713e-446c-9a48-424284bc1904",
+				"method": "GET"
+			},
+			{
+				"id": "bfd501cb-fcf4-4d86-ae78-c5a992c3457a",
+				"method": "GET"
+			},
+			{
+				"id": "82595147-43b2-47e6-bea4-466f6dca4812",
+				"method": "GET"
+			},
+			{
+				"id": "a8e018c1-95b2-4a88-b755-da07945a1273",
+				"method": "GET"
+			},
+			{
+				"id": "36dfd4ab-0f48-4c3e-a3e4-9a39aa1f6d5f",
+				"method": "GET"
+			},
+			{
+				"id": "d15bd330-6452-4fab-b68a-5f6ba1a8dad8",
+				"method": "GET"
+			},
+			{
+				"id": "73525599-2037-4ead-9507-48805f027ff0",
+				"method": "GET"
+			},
+			{
+				"id": "e61cf60a-7e0f-4f22-84a5-e5b825765c53",
+				"method": "GET"
+			}
+		]
+	}
+}

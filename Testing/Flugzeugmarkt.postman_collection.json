@@ -1,0 +1,630 @@
+{
+	"info": {
+		"_postman_id": "6bc7ee6c-f7d6-4bf7-b0a0-1ee909ae3b9b",
+		"name": "Flugzeugmarkt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Milestone 1",
+			"item": [
+				{
+					"name": "Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/test/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"test",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test valides JSON",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/testliste",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"flugzeug",
+								"testliste"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flugzeug: list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"flugzeug",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flugzeug: check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.flugzeugtyp).to.eql(\"777-300ER\");\r",
+									"    pm.expect(responseJson.herstellungsdatum).to.eql(\"2017\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/check?flugzeugUUID=4efd4ee9-1e3e-47cc-a919-93194c5137cd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"flugzeug",
+								"check"
+							],
+							"query": [
+								{
+									"key": "flugzeugUUID",
+									"value": "4efd4ee9-1e3e-47cc-a919-93194c5137cd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flugzeug: check empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.eql(null);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/check?flugzeugUUID=a1c0bb34-7f7f-41a3-8960-04487f696bc2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"flugzeug",
+								"check"
+							],
+							"query": [
+								{
+									"key": "flugzeugUUID",
+									"value": "a1c0bb34-7f7f-41a3-8960-04487f696bc2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flugzeug: check invalid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.eql(null);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/check?flugzeugUUID=a1c0bb34-7f7f-41a3-04487f696bc2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"flugzeug",
+								"check"
+							],
+							"query": [
+								{
+									"key": "flugzeugUUID",
+									"value": "a1c0bb34-7f7f-41a3-04487f696bc2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Airline: list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"airline",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Airline: check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.name).to.eql(\"Swiss\");\r",
+									"    pm.expect(responseJson.gruendungsdatum).to.eql(\"2002\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/check?airlineUUID=1bf5dca5-4f25-4225-aff8-c7b5de868ea1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"airline",
+								"check"
+							],
+							"query": [
+								{
+									"key": "airlineUUID",
+									"value": "1bf5dca5-4f25-4225-aff8-c7b5de868ea1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Airline: check empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.eql(null);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/check?airlineUUID=364cce64-2fc7-4b10-8094-fdc10f45eda8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"airline",
+								"check"
+							],
+							"query": [
+								{
+									"key": "airlineUUID",
+									"value": "364cce64-2fc7-4b10-8094-fdc10f45eda8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Airline: check invalid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.eql(null);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/check?airlineUUID=364cce64-2fc7-8094-fdc10f45eda8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"airline",
+								"check"
+							],
+							"query": [
+								{
+									"key": "airlineUUID",
+									"value": "364cce64-2fc7-8094-fdc10f45eda8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hersteller: list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"hersteller",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hersteller: check",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.name).to.eql(\"Airbus\");\r",
+									"    pm.expect(responseJson.gruendungsdatum).to.eql(\"1970\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/check?herstellerUUID=1a8b4702-59d8-4a22-927a-0d1c9713bba1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"hersteller",
+								"check"
+							],
+							"query": [
+								{
+									"key": "herstellerUUID",
+									"value": "1a8b4702-59d8-4a22-927a-0d1c9713bba1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hersteller: check empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.eql(null);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/check?herstellerUUID=ed79fa21-4a43-4b85-ba58-18a1e74af0df",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"hersteller",
+								"check"
+							],
+							"query": [
+								{
+									"key": "herstellerUUID",
+									"value": "ed79fa21-4a43-4b85-ba58-18a1e74af0df"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hersteller: check invalid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.eql(null);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/check?herstellerUUID=ed79-fa21-4a43-4b85-ba58-18a1e74af0df",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"hersteller",
+								"check"
+							],
+							"query": [
+								{
+									"key": "herstellerUUID",
+									"value": "ed79-fa21-4a43-4b85-ba58-18a1e74af0df"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
