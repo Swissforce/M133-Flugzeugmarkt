@@ -35,7 +35,8 @@ public class Airline {
         setAirlineUUID(airlineUUID);
         setGruendungsdatum(gruendungsdatum);
 
-        flugzeuge = new Vector<>();
+        flugzeuge = null;
+        //flugzeuge = new Vector<>();
     }
 
     /**
@@ -48,7 +49,8 @@ public class Airline {
         setName(name);
         setAirlineUUID(airlineUUID);
 
-        flugzeuge = new Vector<>();
+        flugzeuge = null;
+        //flugzeuge = new Vector<>();
     }
 
     /**
@@ -59,7 +61,8 @@ public class Airline {
         setName(name);
         setAirlineUUID(UUID.randomUUID().toString());
 
-        flugzeuge = new Vector<>();
+        flugzeuge = null;
+        //flugzeuge = new Vector<>();
     }
 
     /**
@@ -68,7 +71,8 @@ public class Airline {
     public Airline(){
         setAirlineUUID(UUID.randomUUID().toString());
 
-        flugzeuge = new Vector<>();
+        flugzeuge = null;
+        //flugzeuge = new Vector<>();
     }
 
 
@@ -236,6 +240,9 @@ public class Airline {
      * @param flugzeug
      */
     public void addFlugzeug(Flugzeug flugzeug){
+        if (flugzeuge == null){
+            flugzeuge = new Vector<>();
+        }
         flugzeuge.add(flugzeug);
     }
 

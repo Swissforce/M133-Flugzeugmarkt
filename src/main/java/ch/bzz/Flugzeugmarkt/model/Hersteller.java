@@ -35,7 +35,8 @@ public class Hersteller {
         setHerstellerUUID(herstellerUUID);
         setGruendungsdatum(gruendungsdatum);
 
-        zuverkaufendeFlugzeuge = new Vector<>();
+        zuverkaufendeFlugzeuge = null;
+        //zuverkaufendeFlugzeuge = new Vector<>();
     }
 
     /**
@@ -48,7 +49,8 @@ public class Hersteller {
         setName(name);
         setHerstellerUUID(herstellerUUID);
 
-        zuverkaufendeFlugzeuge = new Vector<>();
+        zuverkaufendeFlugzeuge = null;
+        //zuverkaufendeFlugzeuge = new Vector<>();
     }
 
     /**
@@ -60,7 +62,8 @@ public class Hersteller {
         setName(name);
         setHerstellerUUID(UUID.randomUUID().toString());
 
-        zuverkaufendeFlugzeuge = new Vector<>();
+        zuverkaufendeFlugzeuge = null;
+        //zuverkaufendeFlugzeuge = new Vector<>();
     }
 
     /**
@@ -70,7 +73,8 @@ public class Hersteller {
     public Hersteller(){
         setHerstellerUUID(UUID.randomUUID().toString());
 
-        zuverkaufendeFlugzeuge = new Vector<>();
+        zuverkaufendeFlugzeuge = null;
+        //zuverkaufendeFlugzeuge = new Vector<>();
     }
 
 
@@ -136,6 +140,9 @@ public class Hersteller {
      * @param flugzeug
      */
     public void addZuverkaufendeFlugzeuge(Flugzeug flugzeug){
+        if (zuverkaufendeFlugzeuge == null){
+            zuverkaufendeFlugzeuge = new Vector<>();
+        }
         zuverkaufendeFlugzeuge.add(flugzeug);
     }
 

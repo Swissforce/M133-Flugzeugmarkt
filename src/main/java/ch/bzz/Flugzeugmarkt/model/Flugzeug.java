@@ -26,6 +26,23 @@ public class Flugzeug {
      * @param flugzeugtyp
      * @param flugzeugUUID
      * @param herstellungsdatum
+     * @param airline
+     * @throws IllegalArgumentException
+     */
+    public Flugzeug(Hersteller hersteller, String flugzeugtyp, String flugzeugUUID, String herstellungsdatum, Airline airline) throws IllegalArgumentException{
+        setHersteller(hersteller);
+        setFlugzeugtyp(flugzeugtyp);
+        setFlugzeugUUID(flugzeugUUID);
+        setHerstellungsdatum(herstellungsdatum);
+        setAirline(airline);
+    }
+
+    /**
+     * ausführlicher Konstruktor, ohne Airline
+     * @param hersteller
+     * @param flugzeugtyp
+     * @param flugzeugUUID
+     * @param herstellungsdatum
      * @throws IllegalArgumentException
      */
     public Flugzeug(Hersteller hersteller, String flugzeugtyp, String flugzeugUUID, String herstellungsdatum) throws IllegalArgumentException{
@@ -65,6 +82,13 @@ public class Flugzeug {
      */
     public Flugzeug(Hersteller hersteller){
         setHersteller(hersteller);
+        setFlugzeugUUID(UUID.randomUUID().toString());
+    }
+
+    /**
+     * Leerer Konstruktor, damit das deserialisieren vom JSON funktioniert
+     */
+    public Flugzeug(){
         setFlugzeugUUID(UUID.randomUUID().toString());
     }
 
