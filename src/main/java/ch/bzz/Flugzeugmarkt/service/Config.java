@@ -40,6 +40,10 @@ public class Config extends Application {
         return providers;
     }
 
+
+    //ab hier, ist es von Bookshelf kopiert.
+    //https://github.com/bzz-fgict/Lektion04/blob/04-forms/src/main/java/ch/bzz/bookshelf/service/Config.java
+
     /**
      * Gets the value of a property
      *

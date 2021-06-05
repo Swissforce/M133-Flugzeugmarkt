@@ -146,5 +146,4 @@ public class Hersteller {
         zuverkaufendeFlugzeuge.add(flugzeug);
     }
 
-    //TODO
 }

@@ -6,9 +6,10 @@ import ch.bzz.Flugzeugmarkt.model.Airline;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Map;
+import java.util.UUID;
 
 /**
  * Bietet die Services der Modelklasse Airline.java
@@ -26,13 +27,42 @@ public class AirlineService {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listAirlines(){
-        Map<String, Airline> airlineMap = DataHandler.getAirlineMap();
-        //Map<String, Airline> test = new HashMap<>();
+
         Response response = Response
                 .status(200)
-                .entity(airlineMap)
+                .entity(DataHandler.stringVonJSON(DataHandler.getAirlineMap()))
                 .build();
         return response;
+    }
+
+
+    @GET
+    @Path("check")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response checkAirline(
+            @QueryParam("airlineUUID") String airlineUUID
+    ){
+        int status = 200;
+        Airline airline = null;
+
+        try {
+            UUID.fromString(airlineUUID);          //schaut, ob die UUID formal korrekt ist, wenn nicht, schmeists IllegalArgumentException
+            if (DataHandler.getAirline(airlineUUID) == null){     //schaut, ob die UUID mit einem Airlineobjekt referenziert ist
+                status = 404;       //Not found
+            } else {
+                airline = DataHandler.getAirline(airlineUUID);
+            }
+        } catch (IllegalArgumentException e){
+            status = 400;       //Bad Request
+        }
+        finally {
+            Response response = Response
+                    .status(status)
+                    .entity(DataHandler.stringVonJSON(airline))
+                    .build();
+
+            return response;
+        }
     }
 
 }

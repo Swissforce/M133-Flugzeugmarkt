@@ -28,5 +28,15 @@
     "flugzeugtyp": "A320neo",
     "flugzeugUUID": "c3effae4-81e2-4a94-b8f3-48f43c998630",
     "herstellungsdatum": "2020"
+  },
+  {
+    "hersteller": {
+      "name": "Boeing",
+      "herstellerUUID": "914312a7-c0d7-42c2-905b-7dd8332cf6c9",
+      "gruendungsdatum": "1916"
+    },
+    "flugzeugtyp": "747-800",
+    "flugzeugUUID": "dea6943a-daf6-4a90-b333-89aae1f8873c",
+    "herstellungsdatum": "2018"
   }
 ]

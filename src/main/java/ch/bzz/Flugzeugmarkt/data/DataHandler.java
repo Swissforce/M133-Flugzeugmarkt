@@ -74,30 +74,56 @@ public class DataHandler {
         return flugzeugMap;
     }
 
+    /**
+     * gibt ein Airlineobjekt der airlineMap zurück.
+     * @param airlineUUID
+     * @return Airline
+     */
+    public static Airline getAirline (String airlineUUID) {
+        return getAirlineMap().get(airlineUUID);
+    }
+
+    /**
+     * gibt ein Herstellerobjekt der herstellerMap zurück.
+     * @param herstellerUUID
+     * @return Hersteller
+     */
+    public static Hersteller getHersteller (String herstellerUUID) {
+        return getHerstellerMap().get(herstellerUUID);
+    }
+
+    /**
+     * gibt ein Flugzeugobjekt der FlugzeugMap zurück.
+     * @param flugzeugUUID
+     * @return Flugzeug
+     */
+    public static Flugzeug getFlugzeug (String flugzeugUUID){
+        return getFlugzeugMap().get(flugzeugUUID);
+    }
+
 
     //Methoden
 
     /**
-     * Diese Methode ist nötig, da ich aus irgendeinem Grund, nicht direkt das Map-Objekt in den Servieklassen returnen kann. (500 - internal Servererror, irgendwo am Arsch von Glassfish)
-     * Diese Methode konvertriert eine Map in JSON-Format und gibt diese als String zurück.
-     * @param map
+     * Diese Methode ist nötig, da ich aus irgendeinem Grund, nicht direkt xy-Objekt in den Servieklassen returnen kann. (500 - internal Servererror, irgendwo am Arsch von Glassfish)
+     * Diese Methode konvertriert ein Objekt, in JSON-Format, und gibt diese als String zurück.
+     * @param obj
      * @return JSON-Format der Map, aber als String
      * @throws JsonProcessingException
      */
-    public static String stringVonJSON(HashMap map) {
+    public static String stringVonJSON(Object obj) {
         String output = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            output = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(map);
+            output = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
         } catch (JsonProcessingException e){
-            //nichts
+            e.printStackTrace();
         }
         finally {
             return output;
         }
 
     }
-
 
     /**
      * List das JSON File und wandelt dieses in Objekte um.
@@ -151,11 +177,5 @@ public class DataHandler {
             e.printStackTrace();
         }
     }
-
-
-    private static void writeJSON(){
-        //bla bla
-    }
-
 
 }

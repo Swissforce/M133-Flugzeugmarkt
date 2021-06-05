@@ -246,5 +246,4 @@ public class Airline {
         flugzeuge.add(flugzeug);
     }
 
-    //TODO Methode für den Kauf von Flugzeugen über den Hersteller
 }
