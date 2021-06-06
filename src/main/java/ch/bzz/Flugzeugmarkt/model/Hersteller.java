@@ -2,8 +2,8 @@ package ch.bzz.Flugzeugmarkt.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.HashMap;
 import java.util.UUID;
-import java.util.Vector;
 
 /**
  * Modelklasse des Herstellers
@@ -18,7 +18,7 @@ public class Hersteller {
     private String herstellerUUID;
     private String gruendungsdatum;
     @JsonIgnore
-    private Vector <Flugzeug> zuverkaufendeFlugzeuge;
+    private HashMap<String, Flugzeug> zuverkaufendeFlugzeuge;
 
 
     //Konstruktoren
@@ -36,7 +36,6 @@ public class Hersteller {
         setGruendungsdatum(gruendungsdatum);
 
         zuverkaufendeFlugzeuge = null;
-        //zuverkaufendeFlugzeuge = new Vector<>();
     }
 
     /**
@@ -50,7 +49,6 @@ public class Hersteller {
         setHerstellerUUID(herstellerUUID);
 
         zuverkaufendeFlugzeuge = null;
-        //zuverkaufendeFlugzeuge = new Vector<>();
     }
 
     /**
@@ -63,7 +61,6 @@ public class Hersteller {
         setHerstellerUUID(UUID.randomUUID().toString());
 
         zuverkaufendeFlugzeuge = null;
-        //zuverkaufendeFlugzeuge = new Vector<>();
     }
 
     /**
@@ -74,7 +71,6 @@ public class Hersteller {
         setHerstellerUUID(UUID.randomUUID().toString());
 
         zuverkaufendeFlugzeuge = null;
-        //zuverkaufendeFlugzeuge = new Vector<>();
     }
 
 
@@ -132,18 +128,25 @@ public class Hersteller {
         this.gruendungsdatum = gruendungsdatum;
     }
 
+    /**
+     * gibt die Hashmap der Flugzeuge, ohne Airline, zurück
+     * @return zuverkaufendeFlugzeuge
+     */
+    public HashMap<String, Flugzeug> getZuverkaufendeFlugzeuge() {
+        return zuverkaufendeFlugzeuge;
+    }
 
     //Methoden
 
     /**
-     * fügt dem Vector ein neues Flugzeug hinzu
+     * fügt der Hashmap ein neues Flugzeug hinzu
      * @param flugzeug
      */
     public void addZuverkaufendeFlugzeuge(Flugzeug flugzeug){
         if (zuverkaufendeFlugzeuge == null){
-            zuverkaufendeFlugzeuge = new Vector<>();
+            zuverkaufendeFlugzeuge = new HashMap<>();
         }
-        zuverkaufendeFlugzeuge.add(flugzeug);
+        zuverkaufendeFlugzeuge.put(flugzeug.getFlugzeugUUID(), flugzeug);
     }
 
 }

@@ -2,8 +2,8 @@ package ch.bzz.Flugzeugmarkt.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.HashMap;
 import java.util.UUID;
-import java.util.Vector;
 
 /**
  * Modelklasse der Airline
@@ -18,7 +18,7 @@ public class Airline {
     private String airlineUUID;
     private String gruendungsdatum;
     @JsonIgnore
-    private Vector <Flugzeug> flugzeuge;
+    private HashMap<String, Flugzeug> flugzeuge;
 
 
     //Konstruktoren
@@ -36,7 +36,6 @@ public class Airline {
         setGruendungsdatum(gruendungsdatum);
 
         flugzeuge = null;
-        //flugzeuge = new Vector<>();
     }
 
     /**
@@ -50,7 +49,6 @@ public class Airline {
         setAirlineUUID(airlineUUID);
 
         flugzeuge = null;
-        //flugzeuge = new Vector<>();
     }
 
     /**
@@ -62,7 +60,6 @@ public class Airline {
         setAirlineUUID(UUID.randomUUID().toString());
 
         flugzeuge = null;
-        //flugzeuge = new Vector<>();
     }
 
     /**
@@ -72,7 +69,6 @@ public class Airline {
         setAirlineUUID(UUID.randomUUID().toString());
 
         flugzeuge = null;
-        //flugzeuge = new Vector<>();
     }
 
 
@@ -111,18 +107,13 @@ public class Airline {
     }
 
     /**
-     * gibt ein, mit Index spezifiziertes, Flugzeug vom Vector flugzeuge zurück
-     * Wenn der Index out of bounds ist, wird diese Exception in eine IllegalArgumentException umgewandelt.
-     * @param index
+     * gibt ein Flugzeug aus der Hashmap zurück
+     * Wenn es kein Flugzeug gibt, dann gibt es null zurück
+     * @param flugzeugUUID
      * @return flugzeug
-     * @throws IllegalArgumentException
      */
-    public Flugzeug getFlugzeug(int index) throws IllegalArgumentException {
-        try {
-            return flugzeuge.get(index);
-        } catch (ArrayIndexOutOfBoundsException e){
-            throw new IllegalArgumentException();
-        }
+    public Flugzeug getFlugzeug(String flugzeugUUID) {
+        return flugzeuge.get(flugzeugUUID);
     }
 
     /**
@@ -144,106 +135,26 @@ public class Airline {
         this.airlineUUID = airlineUUID;
     }
 
+    /**
+     * gibt die Hashmap der Flugzeuge der Airline zurück
+     * @return HashMap
+     */
+    public HashMap<String, Flugzeug> getFlugzeuge() {
+        return flugzeuge;
+    }
+
 
     //Methoden
 
     /**
-     * aktualisiert ein, mit Index spezifiziertes, Flugzeug vom Vector flugzeuge.
-     * Dies geschieht, indem das alte Flugzeugobjekt mit einem neuen ersetzt wird.
-     * Wenn der Index out of bounds ist, wird diese Exception in eine IllegalArgumentException umgewandelt.
-     * @param flugzeug
-     * @param index
-     * @throws IllegalArgumentException
-     */
-    public void updateFlugzeug(Flugzeug flugzeug, int index) throws IllegalArgumentException {
-        try {
-            flugzeuge.get(index);   //Schaut, ob das Flugzeug mit dem spezifizierten Index existiert
-        } catch (ArrayIndexOutOfBoundsException e){
-            throw new IllegalArgumentException();
-        }
-        flugzeuge.set(index,flugzeug);
-    }
-
-    /**
-     * aktualisiert ein, mit UUID spezifiziertes, Flugzeug vom Vector flugzeuge.
-     * Dies geschieht, indem das alte Flugzeugobjekt mit einem neuen ersetzt wird.
-     * Wenn kein Flugzeug mit der UUID im Vector vorhanden ist, dann throw IllegalArgumentException.
-     * @param flugzeug
-     * @param flugzeugUUID
-     * @throws IllegalArgumentException
-     */
-    public void updateFlugzeug(Flugzeug flugzeug, String flugzeugUUID) throws IllegalArgumentException{
-        boolean existiert = false;
-        for(Flugzeug x : flugzeuge){
-            if (x.getFlugzeugUUID() == flugzeugUUID){           //Schaut ob ein Flugzeug mit dieser UUID existiert
-                flugzeuge.set(flugzeuge.indexOf(x),flugzeug);
-                existiert = true;
-            }
-        }
-        if (!existiert){
-            throw new IllegalArgumentException();
-        }
-    }
-
-    /**
-     * entfernt ein Flugzeug vom Vector flugzeuge, mithilfe des Indexes
-     * Wenn der Index out of bounds ist, wird diese Exception in eine IllegalArgumentException umgewandelt.
-     * @param index
-     * @throws IllegalArgumentException
-     */
-    public void rmFlugzeug(int index) throws IllegalArgumentException {
-        try {
-            flugzeuge.get(index);   //Schaut, ob das Flugzeug mit dem spezifizierten Index existiert
-        } catch (ArrayIndexOutOfBoundsException e){
-            throw new IllegalArgumentException();
-        }
-        flugzeuge.remove(index);
-    }
-
-    /**
-     * entfernt ein Flugzeug vom Vector flugzeuge, mithilfe des Objektes
-     * Wenn das Objekt nicht im Vector flugzeuge vorhanden ist, schmeisst es eine IllegalArgumentException
-     * @param flugzeug
-     * @throws IllegalArgumentException
-     */
-    public void rmFlugzeug(Flugzeug flugzeug) throws IllegalArgumentException {
-        if (flugzeuge.contains(flugzeug)){  //Schaut, ob das Flugzeug mit dem spezifizierten Index existiert
-            flugzeuge.remove(flugzeug);
-        }
-        else {
-            throw new IllegalArgumentException();
-        }
-
-    }
-
-    /**
-     * entfernt ein Flugzeug vom Vector flugzeuge, mithilfe der UUID
-     * Wenn kein Flugzeug mit der UUID im Vector flugzeuge vorhanden ist, schmeisst es eine IllegalArgumentException
-     * @param flugzeugUUID
-     * @throws IllegalArgumentException
-     */
-    public void rmFlugzeug(String flugzeugUUID) throws IllegalArgumentException{
-        boolean existiert = false;
-        for(Flugzeug x : flugzeuge){
-            if (x.getFlugzeugUUID() == flugzeugUUID){           //Schaut ob ein Flugzeug mit dieser UUID existiert
-                flugzeuge.remove(x);
-                existiert = true;
-            }
-        }
-        if (!existiert){
-            throw new IllegalArgumentException();
-        }
-    }
-
-    /**
-     * Fügt ein Flugzeug zum Vector hinzu
+     * Fügt ein Flugzeug zur Hashmap hinzu
      * @param flugzeug
      */
     public void addFlugzeug(Flugzeug flugzeug){
         if (flugzeuge == null){
-            flugzeuge = new Vector<>();
+            flugzeuge = new HashMap<>();
         }
-        flugzeuge.add(flugzeug);
+        flugzeuge.put(flugzeug.getFlugzeugUUID(), flugzeug);
     }
 
 }

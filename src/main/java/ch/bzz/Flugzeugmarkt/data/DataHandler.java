@@ -144,7 +144,7 @@ public class DataHandler {
                             neueAirline = airlineMap.get(neueAirline.getAirlineUUID());     //holt sich die Referenz der bereits existierenden Airline
                             flugzeug.setAirline(airlineMap.get(neueAirline.getAirlineUUID()));  //GANZ WICHTIG, dem neuen Flugzeugobjekt muss die Referenz der alten Airline übergegeben werden,
                             // da er sonst die bei ihm im JSON gespeicherte Airline nehmen würde. Dies hat zur Folge, dass nicht die gleiche Airline gespeichert wird,
-                            // da die richtige noch ein Vector mit Flugzeugen hat, die neue aber nicht
+                            // da die richtige noch eine Hashmap mit Flugzeugen hat, die neue aber nicht
                         }
                         neueAirline.addFlugzeug(flugzeug);          //fügt das neue Flugzeug der Flotte hinzu
                         airlineMap.put(neueAirline.getAirlineUUID(), neueAirline);
@@ -156,17 +156,21 @@ public class DataHandler {
                     if (!herstellerMap.containsKey(flugzeug.getHersteller().getHerstellerUUID())){      //wenn der Hersteller noch nicht existiert
                         if (flugzeug.getHersteller() != null){          //Wenn der Hersteller im JSON vorhanden ist
                             Hersteller neuerHersteller = flugzeug.getHersteller();  //nimmt das Herstellerobjekt aus dem JSON
-                            herstellerMap.put(flugzeug.getHersteller().getHerstellerUUID(), neuerHersteller);   //Fügt den errstellten Hersteller der Map hinzu
+                            neuerHersteller.addZuverkaufendeFlugzeuge(flugzeug);    //fügt sich selber der Liste hinzu
+                            herstellerMap.put(neuerHersteller.getHerstellerUUID(), neuerHersteller);   //Fügt den errstellten Hersteller der Map hinzu
                         }
                         else {
                             //es gibt keinen Hersteller
                         }
                     }
                     if (gehoertHersteller && herstellerMap.containsKey(flugzeug.getHersteller().getHerstellerUUID())){      //Wenn das Flugzeug dem Hersteller gehört & der Hersteller exsistiert
+                        Hersteller hersteller = flugzeug.getHersteller();
+                        hersteller = herstellerMap.get(hersteller.getHerstellerUUID());
+                        flugzeug.setHersteller(herstellerMap.get(hersteller.getHerstellerUUID()));
                         herstellerMap.get(flugzeug.getHersteller().getHerstellerUUID()).addZuverkaufendeFlugzeuge(flugzeug);
                     }
 
-                    flugzeugMap.put(flugzeug.getFlugzeugUUID(), flugzeug);      //fügt das flugzeugobjekt in den Flugzeug-Vektor hinzu
+                    flugzeugMap.put(flugzeug.getFlugzeugUUID(), flugzeug);      //fügt das flugzeugobjekt in die Flugzeug-Hashmap hinzu
 
                 } catch (Exception e){
                     e.printStackTrace();
