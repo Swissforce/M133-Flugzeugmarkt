@@ -3,6 +3,7 @@ package ch.bzz.Flugzeugmarkt.service;
 import ch.bzz.Flugzeugmarkt.data.DataHandler;
 import ch.bzz.Flugzeugmarkt.model.Airline;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -60,6 +61,69 @@ public class AirlineService {
 
             return response;
         }
+    }
+
+
+    @POST
+    @Path("insert")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response insertAirline(
+            @Valid @BeanParam Airline airline
+    ){
+        int status = 200;
+
+        DataHandler.insertAirline(airline);
+
+        Response response = Response
+                .status(status)
+                .entity("")
+                .build();
+
+        return response;
+    }
+
+
+    @PUT
+    @Path("update")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response updateAirline(
+            @FormParam("alteAirlineUUID") String airlineUUID,
+            @Valid @BeanParam Airline airline
+    ){
+        int status = 200;
+
+        try {
+            UUID.fromString(airlineUUID);
+
+            if (DataHandler.getAirline(airlineUUID) != null){
+                if (airline.getAirlineUUID() != null){
+                    DataHandler.getAirline(airlineUUID).setAirlineUUID(airline.getAirlineUUID());
+                }
+                if (airline.getGruendungsdatum() != null){
+                    DataHandler.getAirline(airlineUUID).setGruendungsdatum(airline.getGruendungsdatum());
+                }
+                if (airline.getName() != null){
+                    DataHandler.getAirline(airlineUUID).setName(airline.getName());
+                }
+
+                Airline alteAirline = DataHandler.getAirlineMap().remove(airlineUUID);      //damit sich der Key auch ändert
+                DataHandler.insertAirline(alteAirline);
+
+            }
+            else {
+                status = 404;   //Not found
+            }
+        }
+        catch (IllegalArgumentException e){
+            status = 400;   //Bad Request
+        }
+
+        Response response = Response
+                .status(status)
+                .entity("")
+                .build();
+
+        return response;
     }
 
 

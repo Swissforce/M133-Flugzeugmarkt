@@ -12,7 +12,6 @@ import java.util.UUID;
 
 /**
  * Bietet die Services der Modelklasse Flugzeug.java
- * beinhaltet KEINE create-/update-/remove- etc. Methoden, da dies über Airline/Hersteller gemanaged wird
  *
  * @author Martin Düppenbecker
  * @version 1.0
@@ -138,6 +137,7 @@ public class FlugzeugService {
 
                 DataHandler.insertFlugzeug(flugzeug);   //fügt das Flugzeug der HashMap hinzu
 
+
             } catch (IllegalArgumentException e){
                 status = 400;       //Bad Request
             }
@@ -170,6 +170,11 @@ public class FlugzeugService {
 
                 Flugzeug flugzeugImSpeicher = DataHandler.getFlugzeug(flugzeugUUID);      //Dies ist das Flugzeugobjekt, das abgeändert werden soll
 
+                if (flugzeugImSpeicher == null){
+                    status = 404;   //Not found
+                    break;
+                }
+
                 if (herstellerUUID != null){
                     if (DataHandler.getHersteller(herstellerUUID) == null){
                         status = 404;   //Not found
@@ -190,7 +195,7 @@ public class FlugzeugService {
 
 
                 if (airlineUUID != null){
-                    if (DataHandler.getAirline(airlineUUID) != null){
+                    if (DataHandler.getAirline(airlineUUID) == null){
                         status = 404;   //Not found
                         break;
                     }

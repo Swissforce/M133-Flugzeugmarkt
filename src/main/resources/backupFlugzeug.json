@@ -5,14 +5,14 @@
       "herstellerUUID": "914312a7-c0d7-42c2-905b-7dd8332cf6c9",
       "gruendungsdatum": "1916"
     },
-    "flugzeugtyp": "777-300ER",
-    "flugzeugUUID": "4efd4ee9-1e3e-47cc-a919-93194c5137cd",
-    "herstellungsdatum": "2017",
     "airline": {
       "name": "Swiss",
       "airlineUUID": "1bf5dca5-4f25-4225-aff8-c7b5de868ea1",
       "gruendungsdatum": "2002"
-    }
+    },
+    "flugzeugtyp": "777-300ER",
+    "flugzeugUUID": "4efd4ee9-1e3e-47cc-a919-93194c5137cd",
+    "herstellungsdatum": "2017"
   },
   {
     "hersteller": {
