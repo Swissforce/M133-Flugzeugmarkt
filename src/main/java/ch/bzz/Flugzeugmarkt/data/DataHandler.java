@@ -245,6 +245,7 @@ public class DataHandler {
      * Schreibt die Flugzeuge in das JSON
      */
     private static void writeJSON() {
-        //nichts
+        //diese Methode funktioniert nicht einmal im Bookshelf
+        //TODO
     }
 }
