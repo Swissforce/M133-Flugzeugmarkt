@@ -5,9 +5,12 @@ import ch.bzz.Flugzeugmarkt.model.Flugzeug;
 import ch.bzz.Flugzeugmarkt.model.Hersteller;
 import ch.bzz.Flugzeugmarkt.service.Config;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -103,20 +106,22 @@ public class DataHandler {
     }
 
     /**
+     * fügt ein Flugzeug der flugzeugMap hinzu
+     * @param flugzeug
+     */
+    public static void insertFlugzeug(Flugzeug flugzeug){
+        getFlugzeugMap().put(flugzeug.getFlugzeugUUID(), flugzeug);
+        writeJSON();
+    }
+
+    /**
      * entfernt ein Flugzeug aus der HashMap
      * @param flugzeugUUID
      */
     public static void rmFlugzeug(String flugzeugUUID){
         UUID.fromString(flugzeugUUID);
-        flugzeugMap.remove(flugzeugUUID);
-    }
-
-    /**
-     * fügt ein Flugzeug der flugzeugMap hinzu
-     * @param flugzeug
-     */
-    public static void insertFlugzeug(Flugzeug flugzeug){
-        flugzeugMap.put(flugzeug.getFlugzeugUUID(), flugzeug);
+        getFlugzeugMap().remove(flugzeugUUID);
+        writeJSON();
     }
 
     /**
@@ -124,7 +129,17 @@ public class DataHandler {
      * @param airline
      */
     public static void insertAirline(Airline airline){
-        airlineMap.put(airline.getAirlineUUID(), airline);
+        getAirlineMap().put(airline.getAirlineUUID(), airline);
+    }
+
+    /**
+     * entfernt eine Airline aus der HashMap
+     * @param airlineUUID
+     */
+    public static void rmAirline(String airlineUUID){
+        UUID.fromString(airlineUUID);
+        getAirlineMap().remove(airlineUUID);
+        writeJSON();
     }
 
     /**
@@ -132,17 +147,26 @@ public class DataHandler {
      * @param hersteller
      */
     public static void insertHersteller(Hersteller hersteller){
-        herstellerMap.put(hersteller.getHerstellerUUID(), hersteller);
+        getHerstellerMap().put(hersteller.getHerstellerUUID(), hersteller);
     }
 
+    /**
+     * entfernt einen Hersteller aus der HashMap
+     * @param herstellerUUID
+     */
+    public static void rmHersteller(String herstellerUUID){
+        UUID.fromString(herstellerUUID);
+        getHerstellerMap().remove(herstellerUUID);
+        writeJSON();
+    }
 
 
     //Methoden
 
     /**
-     * Diese Methode ist nötig, da ich aus irgendeinem Grund, nicht direkt xy-Objekt in den Servieklassen returnen kann. (500 - internal Servererror, irgendwo am Arsch von Glassfish)
-     * Diese Methode konvertriert ein Objekt, in JSON-Format, und gibt diese als String zurück.
-     * @param obj
+     * Diese Methode ist nötig, da sich im Speicher das JSON unendlich lang hin und her referenziert.
+     * Dies kann zwar im Speicher passieren, kann aber nicht so ausgedruckt werden.
+     * Diese Methode schneidet die problematische Referenzierung ab, sodass das JSON ausgedruckt werden kann.
      * @return JSON-Format der Map, aber als String
      * @throws JsonProcessingException
      */
@@ -217,4 +241,24 @@ public class DataHandler {
         }
     }
 
+    //originale Version der writeJSON()-Methode von
+    //https://github.com/bzz-fgict/Lektion06/blob/06_view/src/main/java/ch/bzz/bookshelf/data/DataHandler.java
+    /**
+     * Schreibt die Flugzeuge in das JSON
+     */
+    private static void writeJSON(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+        FileOutputStream fileOutputStream = null;
+        Writer fileWriter;
+
+        String bookPath = Config.getProperty("flugzeugJSON");
+        try {
+            fileOutputStream = new FileOutputStream(bookPath);
+            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+            objectWriter.writeValue(fileWriter, getFlugzeugMap().values());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
