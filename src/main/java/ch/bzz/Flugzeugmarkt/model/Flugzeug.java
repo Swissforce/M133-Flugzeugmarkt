@@ -1,5 +1,8 @@
 package ch.bzz.Flugzeugmarkt.model;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.ws.rs.FormParam;
 import java.util.UUID;
 
 /**
@@ -11,10 +14,20 @@ import java.util.UUID;
  */
 
 public class Flugzeug {
-    private Hersteller hersteller;
     private Airline airline;
+
+    private Hersteller hersteller;
+
+    @FormParam("flugzeugtyp")
+    @Size(min = 3, max = 30)
     private String flugzeugtyp;
+
+    @FormParam("flugzeugUUID")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String flugzeugUUID;
+
+    @FormParam("herstellungsdatum")
+    @Size(min = 4, max = 4)
     private String herstellungsdatum;
 
 

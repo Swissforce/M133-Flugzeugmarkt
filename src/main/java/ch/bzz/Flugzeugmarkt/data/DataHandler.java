@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Datahandler für das Lesen und Schreiben von JSON-Dateien
@@ -100,6 +101,40 @@ public class DataHandler {
     public static Flugzeug getFlugzeug (String flugzeugUUID){
         return getFlugzeugMap().get(flugzeugUUID);
     }
+
+    /**
+     * entfernt ein Flugzeug aus der HashMap
+     * @param flugzeugUUID
+     */
+    public static void rmFlugzeug(String flugzeugUUID){
+        UUID.fromString(flugzeugUUID);
+        flugzeugMap.remove(flugzeugUUID);
+    }
+
+    /**
+     * fügt ein Flugzeug der flugzeugMap hinzu
+     * @param flugzeug
+     */
+    public static void insertFlugzeug(Flugzeug flugzeug){
+        flugzeugMap.put(flugzeug.getFlugzeugUUID(), flugzeug);
+    }
+
+    /**
+     * fügt eine Airline der airlineMap hinzu
+     * @param airline
+     */
+    public static void insertAirline(Airline airline){
+        airlineMap.put(airline.getAirlineUUID(), airline);
+    }
+
+    /**
+     * fügt einen Hersteller der herstellerMap hinzu
+     * @param hersteller
+     */
+    public static void insertHersteller(Hersteller hersteller){
+        herstellerMap.put(hersteller.getHerstellerUUID(), hersteller);
+    }
+
 
 
     //Methoden

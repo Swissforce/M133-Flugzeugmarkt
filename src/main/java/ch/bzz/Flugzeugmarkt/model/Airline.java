@@ -2,6 +2,9 @@ package ch.bzz.Flugzeugmarkt.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.ws.rs.FormParam;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -14,9 +17,18 @@ import java.util.UUID;
  */
 
 public class Airline {
+    @FormParam("name")
+    @Size(min = 3, max = 50)
     private String name;
+
+    @FormParam("airlineUUID")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String airlineUUID;
+
+    @FormParam("gruendungsdatum")
+    @Size(min = 4, max = 4)
     private String gruendungsdatum;
+
     @JsonIgnore
     private HashMap<String, Flugzeug> flugzeuge;
 
@@ -155,6 +167,15 @@ public class Airline {
             flugzeuge = new HashMap<>();
         }
         flugzeuge.put(flugzeug.getFlugzeugUUID(), flugzeug);
+    }
+
+    /**
+     * Löscht ein Flugzeug von der HashMap
+     * @param flugzeugUUID
+     */
+    public void rmFlugzeug(String flugzeugUUID){
+        UUID.fromString(flugzeugUUID);
+        flugzeuge.remove(flugzeugUUID);
     }
 
 }
