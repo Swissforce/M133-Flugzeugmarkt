@@ -2,11 +2,13 @@ package ch.bzz.Flugzeugmarkt.service;
 
 import ch.bzz.Flugzeugmarkt.data.DataHandler;
 import ch.bzz.Flugzeugmarkt.model.Airline;
+import ch.bzz.Flugzeugmarkt.model.Flugzeug;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -126,5 +128,43 @@ public class AirlineService {
         return response;
     }
 
+
+    @DELETE
+    @Path("delete")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteAirline(
+            @QueryParam("airlineUUID") String airlineUUID
+    ){
+        int status = 200;
+
+        try {
+            UUID.fromString(airlineUUID);
+
+            if (DataHandler.getAirline(airlineUUID) != null){
+
+                if (DataHandler.getAirline(airlineUUID).getFlugzeuge() != null){    //Wenn die Airline Flugzeuge hat
+                    for (Map.Entry<String,Flugzeug> flugzeug : DataHandler.getAirline(airlineUUID).getFlugzeuge().entrySet()){
+                        flugzeug.getValue().setAirline(null);       //Entfernt die Referenz vom Flugzeug zur Airline
+                    }
+                }
+
+                DataHandler.rmAirline(airlineUUID);
+            }
+            else {
+                status = 404;   //Not found
+            }
+        }
+        catch (IllegalArgumentException e){
+            status = 400;   //Bad Request
+        }
+        finally {
+            Response response = Response
+                    .status(status)
+                    .entity("")
+                    .build();
+
+            return response;
+        }
+    }
 
 }

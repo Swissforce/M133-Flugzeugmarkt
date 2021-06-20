@@ -248,6 +248,9 @@ public class DataHandler {
      * Schreibt die Flugzeuge in das JSON
      */
     private static void writeJSON() {
+        //Diese Methode funktioniert nicht richtig, es speichert es irgenwo zwischen, aber nie wirklich ins JSON
+
+
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
         FileOutputStream fileOutputStream = null;
@@ -261,5 +264,7 @@ public class DataHandler {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+
     }
 }

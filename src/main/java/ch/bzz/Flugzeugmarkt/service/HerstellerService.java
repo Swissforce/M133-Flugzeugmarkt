@@ -1,12 +1,14 @@
 package ch.bzz.Flugzeugmarkt.service;
 
 import ch.bzz.Flugzeugmarkt.data.DataHandler;
+import ch.bzz.Flugzeugmarkt.model.Flugzeug;
 import ch.bzz.Flugzeugmarkt.model.Hersteller;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -122,5 +124,43 @@ public class HerstellerService {
         return response;
     }
 
+
+    @DELETE
+    @Path("delete")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteHersteller(
+            @QueryParam("herstellerUUID") String herstellerUUID
+    ){
+        int status = 200;
+
+        try {
+            UUID.fromString(herstellerUUID);
+
+            if (DataHandler.getHersteller(herstellerUUID) != null){
+
+                for (Map.Entry<String, Flugzeug> flugzeug : DataHandler.getFlugzeugMap().entrySet()){
+                    if (flugzeug.getValue().getHersteller() == DataHandler.getHersteller(herstellerUUID)){  //Wenn das Flugzeug eine Referenz zum Hersteller hat
+                        flugzeug.getValue().setHersteller(null);       //Entfernt die Referenz vom Flugzeug zum Hersteller
+                    }
+                }
+
+                DataHandler.rmHersteller(herstellerUUID);
+            }
+            else {
+                status = 404;   //Not found
+            }
+        }
+        catch (IllegalArgumentException e){
+            status = 400;   //Bad Request
+        }
+        finally {
+            Response response = Response
+                    .status(status)
+                    .entity("")
+                    .build();
+
+            return response;
+        }
+    }
 
 }

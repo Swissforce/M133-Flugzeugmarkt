@@ -1031,6 +1031,183 @@
 					"response": []
 				},
 				{
+					"name": "Flugzeug: update Test unknown",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.flugzeugtyp).to.eql(\"A350-900\");\r",
+									"    pm.expect(responseJson.herstellungsdatum).to.eql(\"2020\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/check?flugzeugUUID=b1e14e73-13e7-4f23-8db1-2e1e11873e54",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"flugzeug",
+								"check"
+							],
+							"query": [
+								{
+									"key": "flugzeugUUID",
+									"value": "b1e14e73-13e7-4f23-8db1-2e1e11873e54"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flugzeug: remove",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/delete?flugzeugUUID=c3effae4-81e2-4a94-b8f3-48f43c998630",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"flugzeug",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "flugzeugUUID",
+									"value": "c3effae4-81e2-4a94-b8f3-48f43c998630"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flugzeug: remove Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.eql(null);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/check?flugzeugUUID=c3effae4-81e2-4a94-b8f3-48f43c998630",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"flugzeug",
+								"check"
+							],
+							"query": [
+								{
+									"key": "flugzeugUUID",
+									"value": "c3effae4-81e2-4a94-b8f3-48f43c998630"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Flugzeug: remove unknown",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/flugzeug/delete?flugzeugUUID=2799810d-34ff-44d1-a57f-4289853c0555",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"flugzeug",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "flugzeugUUID",
+									"value": "2799810d-34ff-44d1-a57f-4289853c0555"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Airline: insert",
 					"event": [
 						{
@@ -1423,6 +1600,190 @@
 					"response": []
 				},
 				{
+					"name": "Airline: update Test unknown",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.name).to.eql(\"Swiss 3.0\");\r",
+									"    pm.expect(responseJson.gruendungsdatum).to.eql(\"2025\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/check?airlineUUID=5b7222f1-1fdb-46f3-b53b-2c3f740d1b2c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"airline",
+								"check"
+							],
+							"query": [
+								{
+									"key": "airlineUUID",
+									"value": "5b7222f1-1fdb-46f3-b53b-2c3f740d1b2c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Airline: remove",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/delete?airlineUUID=277df517-2775-4b2e-bed1-3db89014fcfc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"airline",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "airlineUUID",
+									"value": "277df517-2775-4b2e-bed1-3db89014fcfc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Airline: remove Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.eql(null);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/check?airlineUUID=277df517-2775-4b2e-bed1-3db89014fcfc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"airline",
+								"check"
+							],
+							"query": [
+								{
+									"key": "airlineUUID",
+									"value": "277df517-2775-4b2e-bed1-3db89014fcfc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Airline: remove unknown",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/delete?airlineUUID=3d8a42a7-8255-49be-be79-17c4a531fb10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"airline",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "airlineUUID",
+									"value": "3d8a42a7-8255-49be-be79-17c4a531fb10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Hersteller: insert",
 					"event": [
 						{
@@ -1754,7 +2115,7 @@
 					"response": []
 				},
 				{
-					"name": "Hersteller: update komplett Copy",
+					"name": "Hersteller: update unknown",
 					"event": [
 						{
 							"listen": "test",
@@ -1809,6 +2170,190 @@
 								"markt",
 								"hersteller",
 								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hersteller: update Test unknown",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.name).to.eql(\"Boeing 3.0\");\r",
+									"    pm.expect(responseJson.gruendungsdatum).to.eql(\"2025\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/check?herstellerUUID=c7e8c9ea-637a-476f-832f-8d57abe7c4a4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"hersteller",
+								"check"
+							],
+							"query": [
+								{
+									"key": "herstellerUUID",
+									"value": "c7e8c9ea-637a-476f-832f-8d57abe7c4a4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hersteller: remove",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/delete?herstellerUUID=a4b72b72-edb3-4411-ad58-fbc891c2dce8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"hersteller",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "herstellerUUID",
+									"value": "a4b72b72-edb3-4411-ad58-fbc891c2dce8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hersteller: remove Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"validate response\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.eql(null);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/check?herstellerUUID=a4b72b72-edb3-4411-ad58-fbc891c2dce8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"hersteller",
+								"check"
+							],
+							"query": [
+								{
+									"key": "herstellerUUID",
+									"value": "a4b72b72-edb3-4411-ad58-fbc891c2dce8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hersteller: remove unknown",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/hersteller/delete?herstellerUUID=c4b3b57a-044a-46ce-b270-b9edba3429fc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"hersteller",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "herstellerUUID",
+									"value": "c4b3b57a-044a-46ce-b270-b9edba3429fc"
+								}
 							]
 						}
 					},

@@ -170,64 +170,67 @@ public class FlugzeugService {
 
                 Flugzeug flugzeugImSpeicher = DataHandler.getFlugzeug(flugzeugUUID);      //Dies ist das Flugzeugobjekt, das abgeändert werden soll
 
-                if (flugzeugImSpeicher == null){
+                if (flugzeugImSpeicher != null){
+
+                    if (herstellerUUID != null){
+                        if (DataHandler.getHersteller(herstellerUUID) == null){
+                            status = 404;   //Not found
+                            break;
+                        }
+                        else {
+                            UUID.fromString(herstellerUUID);
+                            flugzeug.setHersteller(DataHandler.getHersteller(herstellerUUID));
+                            if (flugzeugImSpeicher.getAirline() == null){       //Wenn das Flugzeug neu der Airline gehört, und nicht mehr dem Hersteller, dann löscht es das Flugzeug aus dem Hersteller
+                                DataHandler.getHersteller(flugzeugImSpeicher.getHersteller().getHerstellerUUID()).rmZuverkaufendeFlugzeuge(flugzeugImSpeicher.getHersteller().getHerstellerUUID());
+                            }
+                            if (airlineUUID == null && flugzeugImSpeicher.getAirline() != null){        //Wenn das Flugzeug jetzt neu dem Hersteller gehört
+                                DataHandler.getAirline(flugzeugImSpeicher.getAirline().getAirlineUUID()).rmFlugzeug(flugzeugImSpeicher.getFlugzeugUUID());   //Löscht das Flugzeug aus der alten Airline
+                                DataHandler.getHersteller(herstellerUUID).addZuverkaufendeFlugzeuge(flugzeug);      //Fügt das Flugzeug der Liste vom Hersteller hinzu
+                            }
+                        }
+                    }
+
+
+                    if (airlineUUID != null){
+                        if (DataHandler.getAirline(airlineUUID) == null){
+                            status = 404;   //Not found
+                            break;
+                        }
+                        else {
+                            UUID.fromString(airlineUUID);
+                            if (flugzeugImSpeicher.getFlugzeugUUID() != null){
+                                DataHandler.getAirline(flugzeugImSpeicher.getAirline().getAirlineUUID()).rmFlugzeug(flugzeugImSpeicher.getFlugzeugUUID());   //Löscht das Flugzeug aus der alten Airline
+                            }
+                            flugzeug.setAirline(DataHandler.getAirline(airlineUUID));   //Fügt die Airline dem Flugzeug hinzu
+                            DataHandler.getAirline(airlineUUID).addFlugzeug(flugzeug);  //Fügt das Flugzeug der Airline hinzu
+                        }
+                    }
+
+
+                    if (flugzeug.getFlugzeugUUID() == null){
+                        flugzeug.setFlugzeugUUID(flugzeugImSpeicher.getFlugzeugUUID());
+                    } else {
+                        UUID.fromString(flugzeug.getFlugzeugUUID());    //Schaut ob die gegebene UUID formal korrekt ist
+                    }
+
+
+                    if (flugzeug.getFlugzeugtyp() == null){
+                        flugzeug.setFlugzeugtyp(flugzeugImSpeicher.getFlugzeugtyp());
+                    }
+
+                    if (flugzeug.getHerstellungsdatum() == null){
+                        flugzeug.setHerstellungsdatum(flugzeugImSpeicher.getHerstellungsdatum());
+                    }
+
+
+                    DataHandler.rmFlugzeug(flugzeugImSpeicher.getFlugzeugUUID());       //Löscht das alte Flugzeug aus dem Speicher (weil evtl. die UUID geändert wurde)
+                    DataHandler.insertFlugzeug(flugzeug);       //Fügt das neue Flugzeug dem Speicher hinzu
+
+
+                }
+                else {
                     status = 404;   //Not found
-                    break;
                 }
-
-                if (herstellerUUID != null){
-                    if (DataHandler.getHersteller(herstellerUUID) == null){
-                        status = 404;   //Not found
-                        break;
-                    }
-                    else {
-                        UUID.fromString(herstellerUUID);
-                        flugzeug.setHersteller(DataHandler.getHersteller(herstellerUUID));
-                        if (flugzeugImSpeicher.getAirline() == null){       //Wenn das Flugzeug neu der Airline gehört, und nicht mehr dem Hersteller, dann löscht es das Flugzeug aus dem Hersteller
-                            DataHandler.getHersteller(flugzeugImSpeicher.getHersteller().getHerstellerUUID()).rmZuverkaufendeFlugzeuge(flugzeugImSpeicher.getHersteller().getHerstellerUUID());
-                        }
-                        if (airlineUUID == null && flugzeugImSpeicher.getAirline() != null){        //Wenn das Flugzeug jetzt neu dem Hersteller gehört
-                            DataHandler.getAirline(flugzeugImSpeicher.getAirline().getAirlineUUID()).rmFlugzeug(flugzeugImSpeicher.getFlugzeugUUID());   //Löscht das Flugzeug aus der alten Airline
-                            DataHandler.getHersteller(herstellerUUID).addZuverkaufendeFlugzeuge(flugzeug);      //Fügt das Flugzeug der Liste vom Hersteller hinzu
-                        }
-                    }
-                }
-
-
-                if (airlineUUID != null){
-                    if (DataHandler.getAirline(airlineUUID) == null){
-                        status = 404;   //Not found
-                        break;
-                    }
-                    else {
-                        UUID.fromString(airlineUUID);
-                        if (flugzeugImSpeicher.getFlugzeugUUID() != null){
-                            DataHandler.getAirline(flugzeugImSpeicher.getAirline().getAirlineUUID()).rmFlugzeug(flugzeugImSpeicher.getFlugzeugUUID());   //Löscht das Flugzeug aus der alten Airline
-                        }
-                        flugzeug.setAirline(DataHandler.getAirline(airlineUUID));   //Fügt die Airline dem Flugzeug hinzu
-                        DataHandler.getAirline(airlineUUID).addFlugzeug(flugzeug);  //Fügt das Flugzeug der Airline hinzu
-                    }
-                }
-
-
-                if (flugzeug.getFlugzeugUUID() == null){
-                    flugzeug.setFlugzeugUUID(flugzeugImSpeicher.getFlugzeugUUID());
-                } else {
-                    UUID.fromString(flugzeug.getFlugzeugUUID());    //Schaut ob die gegebene UUID formal korrekt ist
-                }
-
-
-                if (flugzeug.getFlugzeugtyp() == null){
-                    flugzeug.setFlugzeugtyp(flugzeugImSpeicher.getFlugzeugtyp());
-                }
-
-                if (flugzeug.getHerstellungsdatum() == null){
-                    flugzeug.setHerstellungsdatum(flugzeugImSpeicher.getHerstellungsdatum());
-                }
-
-
-                DataHandler.rmFlugzeug(flugzeugImSpeicher.getFlugzeugUUID());       //Löscht das alte Flugzeug aus dem Speicher (weil evtl. die UUID geändert wurde)
-                DataHandler.insertFlugzeug(flugzeug);       //Fügt das neue Flugzeug dem Speicher hinzu
 
 
             }
@@ -246,4 +249,47 @@ public class FlugzeugService {
         return response;
     }
 
+
+    @DELETE
+    @Path("delete")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteFlugzeug(
+            @QueryParam("flugzeugUUID") String flugzeugUUID
+    ){
+        int status = 200;
+
+        try {
+            UUID.fromString(flugzeugUUID);
+
+            if (DataHandler.getFlugzeug(flugzeugUUID) != null){
+                Flugzeug flugzeug = DataHandler.getFlugzeug(flugzeugUUID);
+
+                //Wenn das Flugzeug in der HashMap des Herstellers vorhanden ist
+                if (DataHandler.getHersteller(flugzeug.getHersteller().getHerstellerUUID()).getZuverkaufendeFlugzeuge().containsKey(flugzeugUUID)){
+                    DataHandler.getHersteller(flugzeug.getHersteller().getHerstellerUUID()).rmZuverkaufendeFlugzeuge(flugzeugUUID);
+                }
+
+                //Wenn das Flugzeug in der HashMap der Airline vorhanden ist
+                else if (DataHandler.getAirline(flugzeug.getAirline().getAirlineUUID()).getFlugzeuge().containsKey(flugzeugUUID)){
+                    DataHandler.getAirline(flugzeug.getAirline().getAirlineUUID()).rmFlugzeug(flugzeugUUID);
+                }
+
+                DataHandler.rmFlugzeug(flugzeugUUID);
+            }
+            else {
+                status = 404;   //Not found
+            }
+        }
+        catch (IllegalArgumentException e){
+            status = 400;   //Bad Request
+        }
+        finally {
+            Response response = Response
+                    .status(status)
+                    .entity("")
+                    .build();
+
+            return response;
+        }
+    }
 }
