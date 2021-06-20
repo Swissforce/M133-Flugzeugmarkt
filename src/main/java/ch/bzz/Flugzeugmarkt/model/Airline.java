@@ -18,15 +18,15 @@ import java.util.UUID;
 
 public class Airline {
     @FormParam("name")
-    @Size(min = 3, max = 50)
+    @Size(min = 3, max = 50, message = "Der Name der Airline muss 3-50 Zeichen lang sein")
     private String name;
 
     @FormParam("airlineUUID")
-    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}", message = "Die UUID der Airline muss eine valide UUID sein")
     private String airlineUUID;
 
     @FormParam("gruendungsdatum")
-    @Size(min = 4, max = 4)
+    @Size(min = 4, max = 4, message = "Das Gründungsdatum der Airline muss im Jahresformat sein")
     private String gruendungsdatum;
 
     @JsonIgnore

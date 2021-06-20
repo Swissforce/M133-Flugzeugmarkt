@@ -18,15 +18,15 @@ import java.util.UUID;
 
 public class Hersteller {
     @FormParam("name")
-    @Size(min = 3, max = 50)
+    @Size(min = 3, max = 50, message = "Der Name des Herstellers muss 3-50 Zeichen lang sein")
     private String name;
 
     @FormParam("herstellerUUID")
-    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}", message = "Die UUID des Herstellers muss eine valide UUID sein")
     private String herstellerUUID;
 
     @FormParam("gruendungsdatum")
-    @Size(min = 4, max = 4)
+    @Size(min = 4, max = 4, message = "Das Gründungsdatum des Herstellers muss im Jahresformat sein")
     private String gruendungsdatum;
 
     @JsonIgnore

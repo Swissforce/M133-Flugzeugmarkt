@@ -21,6 +21,10 @@ import java.util.UUID;
 @Path("flugzeug")
 public class FlugzeugService {
 
+    /**
+     * Gibt die gespeicherten Daten aus
+     * @return Text
+     */
     @GET
     @Path("testliste")
     @Produces(MediaType.TEXT_PLAIN)
@@ -53,6 +57,10 @@ public class FlugzeugService {
     }
 
 
+    /**
+     * Gibt eine Liste aller Flugzeuge als JSON aus
+     * @return JSON
+     */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,6 +75,11 @@ public class FlugzeugService {
     }
 
 
+    /**
+     * Gibt ein spezifiziertes Flugzeug als JSON aus
+     * @param flugzeugUUID
+     * @return JSON
+     */
     @GET
     @Path("check")
     @Produces(MediaType.APPLICATION_JSON)
@@ -97,6 +110,13 @@ public class FlugzeugService {
     }
 
 
+    /**
+     * Fügt ein neues Flugzeug hinzu
+     * @param herstellerUUID
+     * @param airlineUUID
+     * @param flugzeug
+     * @return Text
+     */
     @POST
     @Path("insert")
     @Produces(MediaType.TEXT_PLAIN)
@@ -153,6 +173,15 @@ public class FlugzeugService {
     }
 
 
+    /**
+     * Aktualisiert ein Flugzeug
+     * Es müssen nur die veränderten Daten als Parameter übergeben werden
+     * @param flugzeugUUID
+     * @param airlineUUID
+     * @param herstellerUUID
+     * @param flugzeug
+     * @return Text
+     */
     @PUT
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
@@ -250,6 +279,11 @@ public class FlugzeugService {
     }
 
 
+    /**
+     * Entfernt ein Flugzeug
+     * @param flugzeugUUID
+     * @return Text
+     */
     @DELETE
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)

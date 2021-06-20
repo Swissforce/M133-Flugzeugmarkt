@@ -22,7 +22,10 @@ import java.util.UUID;
 @Path("airline")
 public class AirlineService {
 
-
+    /**
+     * Gibt eine Liste aller Airlines als JSON aus
+     * @return JSON
+     */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
@@ -36,6 +39,11 @@ public class AirlineService {
     }
 
 
+    /**
+     * Gibt eine spezifizierte Airline als JSON aus
+     * @param airlineUUID
+     * @return JSON
+     */
     @GET
     @Path("check")
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,6 +74,11 @@ public class AirlineService {
     }
 
 
+    /**
+     * Fügt eine neue Airline hinzu
+     * @param airline
+     * @return Text
+     */
     @POST
     @Path("insert")
     @Produces(MediaType.TEXT_PLAIN)
@@ -85,6 +98,13 @@ public class AirlineService {
     }
 
 
+    /**
+     * Aktualisiert eine Airline
+     * Es müssen nur die veränderten Daten als Parameter übergeben werden
+     * @param airlineUUID
+     * @param airline
+     * @return Text
+     */
     @PUT
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
@@ -129,6 +149,11 @@ public class AirlineService {
     }
 
 
+    /**
+     * Entfernt eine Airline
+     * @param airlineUUID
+     * @return Text
+     */
     @DELETE
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)

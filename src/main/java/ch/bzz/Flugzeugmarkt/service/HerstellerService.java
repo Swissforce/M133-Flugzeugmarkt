@@ -22,6 +22,10 @@ import java.util.UUID;
 @Path("hersteller")
 public class HerstellerService {
 
+    /**
+     * Gibt eine Liste aller Hersteller als JSON aus
+     * @return JSON
+     */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
@@ -34,6 +38,11 @@ public class HerstellerService {
     }
 
 
+    /**
+     * Gibt einen spezifizierten Hersteller als JSON aus
+     * @param herstellerUUID
+     * @return JSON
+     */
     @GET
     @Path("check")
     @Produces(MediaType.APPLICATION_JSON)
@@ -63,6 +72,11 @@ public class HerstellerService {
     }
 
 
+    /**
+     * Fügt einen neuen Hersteller hinzu
+     * @param hersteller
+     * @return Text
+     */
     @POST
     @Path("insert")
     @Produces(MediaType.TEXT_PLAIN)
@@ -82,6 +96,13 @@ public class HerstellerService {
     }
 
 
+    /**
+     * Aktualisiert einen Hersteller
+     * Es müssen nur die veränderten Daten als Parameter übergeben werden
+     * @param herstellerUUID
+     * @param hersteller
+     * @return Text
+     */
     @PUT
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
@@ -125,6 +146,11 @@ public class HerstellerService {
     }
 
 
+    /**
+     * Entfernt einen Hersteller
+     * @param herstellerUUID
+     * @return Text
+     */
     @DELETE
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)

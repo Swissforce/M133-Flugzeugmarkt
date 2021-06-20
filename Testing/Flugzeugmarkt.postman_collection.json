@@ -1264,54 +1264,6 @@
 					"response": []
 				},
 				{
-					"name": "Airline: insert Test",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"validate response\", function() {\r",
-									"    pm.response.to.be.json;\r",
-									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.name).to.eql(\"Ryanair\");\r",
-									"    pm.expect(responseJson.gruendungsdatum).to.eql(\"1985\");\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/airline/check?airlineUUID=277df517-2775-4b2e-bed1-3db89014fcfc",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"Flugzeugmarkt-1.0-SNAPSHOT",
-								"markt",
-								"airline",
-								"check"
-							],
-							"query": [
-								{
-									"key": "airlineUUID",
-									"value": "277df517-2775-4b2e-bed1-3db89014fcfc"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Airline: update komplett",
 					"event": [
 						{
@@ -2354,6 +2306,42 @@
 									"key": "herstellerUUID",
 									"value": "c4b3b57a-044a-46ce-b270-b9edba3429fc"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Flugzeugmarkt-1.0-SNAPSHOT/markt/test/restore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Flugzeugmarkt-1.0-SNAPSHOT",
+								"markt",
+								"test",
+								"restore"
 							]
 						}
 					},

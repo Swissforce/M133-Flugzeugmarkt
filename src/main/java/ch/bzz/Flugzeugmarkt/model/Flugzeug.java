@@ -19,15 +19,15 @@ public class Flugzeug {
     private Hersteller hersteller;
 
     @FormParam("flugzeugtyp")
-    @Size(min = 3, max = 30)
+    @Size(min = 3, max = 30, message = "Der Typ des Flugzeugs muss 3-30 Zeichen lang sein")
     private String flugzeugtyp;
 
     @FormParam("flugzeugUUID")
-    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}", message = "Die UUID des Flugzeugs muss eine valide UUID sein")
     private String flugzeugUUID;
 
     @FormParam("herstellungsdatum")
-    @Size(min = 4, max = 4)
+    @Size(min = 4, max = 4, message = "Das Herstellungsdatum des Flugzeugs muss im Jahresformat sein")
     private String herstellungsdatum;
 
 

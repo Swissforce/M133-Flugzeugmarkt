@@ -1,5 +1,7 @@
 package ch.bzz.Flugzeugmarkt.service;
 
+import ch.bzz.Flugzeugmarkt.data.DataHandler;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -27,5 +29,19 @@ public class TestService {
                 .entity("hurrah! Der Test hat funktioniert")
                 .build();
         return response;
+    }
+
+    @GET
+    @Path("restore")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response restore(){
+        DataHandler.restoreData();
+
+        Response response = Response
+                .status(200)
+                .entity("Die Daten wurden zurückgesetzt")
+                .build();
+        return response;
+
     }
 }

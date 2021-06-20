@@ -40,7 +40,7 @@ public class DataHandler {
         airlineMap = new HashMap<>();
         herstellerMap = new HashMap<>();
         flugzeugMap = new HashMap<>();
-        readJSON();
+        readJSON("flugzeugJSON");
     }
 
 
@@ -184,13 +184,26 @@ public class DataHandler {
 
     }
 
+
+    /**
+     * Diese Methode setzt die gespeicherten Daten zurück
+     * Sie wird für das Testing gebraucht
+     */
+    public static void restoreData(){
+        airlineMap = new HashMap<>();
+        herstellerMap = new HashMap<>();
+        flugzeugMap = new HashMap<>();
+        readJSON("backupFlugzeugJSON");
+    }
+
+
     /**
      * List das JSON File und wandelt dieses in Objekte um.
      * Es kann eigenständig alleine aus dem flugzeug.json File, alle Flugzeuge, Airlines mit deren Flugzeugen und Hersteller mit deren Flugzeugen herauslesen.
      */
-    private static void readJSON() {
+    private static void readJSON(String filename) {
         try {
-            byte[] jsonData = Files.readAllBytes(Paths.get(Config.getProperty("flugzeugJSON")));
+            byte[] jsonData = Files.readAllBytes(Paths.get(Config.getProperty(filename)));
             ObjectMapper objectMapper = new ObjectMapper();
             Flugzeug[] flugzeuge = objectMapper.readValue(jsonData, Flugzeug[].class);
 
@@ -241,7 +254,6 @@ public class DataHandler {
         }
     }
 
-
     //originale Version der writeJSON()-Methode von
     //https://github.com/bzz-fgict/Lektion06/blob/06_view/src/main/java/ch/bzz/bookshelf/data/DataHandler.java
     /**
@@ -249,7 +261,6 @@ public class DataHandler {
      */
     private static void writeJSON() {
         //Diese Methode funktioniert nicht richtig, es speichert es irgenwo zwischen, aber nie wirklich ins JSON
-
 
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
@@ -264,7 +275,6 @@ public class DataHandler {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
 
     }
 }
