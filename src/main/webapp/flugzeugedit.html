@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Flugzeugedit</title>
+</head>
+<body>
+<form id="flugzeugeditForm" name="flugzeugeditForm">
+  <h3>Flugzeug bearbeiten</h3>
+  <div id="message" style="color: red;"></div>
+  <button type="button" id="logoff">Abmelden</button>
+  <table>
+    <tr>
+      <td><label for="hersteller">Hersteller</label></td>
+      <td>
+        <select id="hersteller" name="herstellerUUID" required>
+        </select>
+        <input id="neueHerstellerUUID" name="neueHerstellerUUID" type="hidden" />
+      </td>
+    </tr>
+    <tr>
+      <td><label for="airline">Airline</label></td>
+      <td>
+        <select id="airline" name="airlineUUID" required>
+        </select>
+        <input id="neueAirlineUUID" name="neueAirlineUUID" type="hidden" />
+      </td>
+    </tr>
+      <td><label for="flugzeugtyp">Flugzeugtyp</label></td>
+      <td>
+        <input id="flugzeugtyp" name="flugzeugtyp" type="text" size="30" minlength="3" maxlength="30" required/>
+        <input id="alteFlugzeugUUID" name="alteFlugzeugUUID" type="hidden" />
+      </td>
+    </tr>
+    <tr>
+      <td><label for="herstellungsdatum">Herstellungsdatum</label></td>
+      <td><input id="herstellungsdatum" name="herstellungsdatum" type="text" size="4" minlength="4" maxlength="4" required/></td>
+    </tr>
+    <tr>
+      <td><label for="flugzeugUUID">UUID</label></td>
+      <td>
+        <input id="flugzeugUUID" name="flugzeugUUID" type="pattern"
+               pattern="[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}"/>
+      </td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td>
+        <button id="save" type="submit">Speichern</button>
+      </td>
+      <td>
+        <button id="reset" type="reset">Zurücksetzen</button>
+      </td>
+      <td>
+        <button id="cancel" type="button">Abbruch</button>
+      </td>
+    </tr>
+  </table>
+</form>
+<script src="./js/jquery-3.6.0.min.js"></script>
+<script src="./js/util.js"></script>
+<script src="./js/flugzeugedit.js"></script>
+</body>
+</html>

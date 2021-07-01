@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Flugzeuge</title>
+</head>
+<body>
+<h3>Flugzeugliste</h3>
+<div id="nav">
+    <button type="button" id="logoff">Abmelden</button>
+    <span id="userRole"></span>
+    <span id="message" style="color: red;"></span>
+</div>
+<form id="flugzeugListForm">
+    <table id="flugzeuge">
+        <thead>
+        <tr>
+            <th>Herstellername</th>
+            <th>Airlinename</th>
+            <th>Flugzeugtyp</th>
+            <th>Herstellungsdatum</th>
+            <th>UUID</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <p>
+        <a href="./flugzeugedit.html">Neues Flugzeug</a>
+    </p>
+</form>
+<script src="./js/jquery-3.6.0.min.js"></script>
+<script src="./js/flugzeuge.js"></script>
+</body>
+</html>
