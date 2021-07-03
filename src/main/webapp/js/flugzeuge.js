@@ -13,8 +13,8 @@ $(document).ready(function () {
      * listener for buttons within shelfForm
      */
 
-    $("#shelfForm").on("click", "button", function () {
-        if (confirm("Wollen Sie dieses Buch wirklich löschen?")) {
+    $("#flugzeugListForm").on("click", "button", function () {
+        if (confirm("Wollen Sie dieses Flugzeug wirklich löschen?")) {
             deleteFlugzeug(this.value);
         }
     });
@@ -41,11 +41,10 @@ function loadFlugzeuge() {
         })
 }
 
-
 function showFlugzeuge(flugzeugData) {
 
     let table = document.getElementById("flugzeuge");
-    //clearTable(table);
+    clearTable(table);
 
     $.each(flugzeugData, function (flugzeugUUID, flugzeug) {
         let row = table.insertRow(-1);
@@ -58,7 +57,7 @@ function showFlugzeuge(flugzeugData) {
 
         cell = row.insertCell(-1);
         if (flugzeug.airline == null){
-            cell.innerHTML = "";
+            cell.innerHTML = "-";
         }
         else {
             cell.innerHTML = flugzeug.airline.name;
@@ -79,12 +78,20 @@ function showFlugzeuge(flugzeugData) {
     });
 }
 
+let tableTitle;
+
 function clearTable(table) {
     while (table.hasChildNodes()) {
-        table.removeChild(table.firstChild);
-    }
-}
+        if (tableTitle == null && table.childElementCount == 1){
+            tableTitle = table.removeChild(table.lastChild);
+        }
+        else {
+            table.removeChild(table.lastChild);
+        }
 
+    }
+    table.append(tableTitle);
+}
 
 function deleteFlugzeug(flugzeugUUID) {
     $

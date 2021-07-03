@@ -131,7 +131,10 @@ public class FlugzeugService {
             try {
                 //schaut, ob die UUIDs Formal korrekt sind & existieren
                 UUID.fromString(herstellerUUID);
-                if (airlineUUID != "") {
+                if (airlineUUID.equals("-")){
+                    airlineUUID = null;
+                }
+                if (airlineUUID != null) {
                     UUID.fromString(airlineUUID);
                 }
 
@@ -143,11 +146,11 @@ public class FlugzeugService {
                     break;
                 }
 
-                if (airlineUUID != "" && DataHandler.getAirline(airlineUUID) != null){  //schaut ob die Airline existiert
+                if (airlineUUID != null && DataHandler.getAirline(airlineUUID) != null){  //schaut ob die Airline existiert
                     flugzeug.setAirline(DataHandler.getAirline(airlineUUID));       //setzt dem Flugzeug die Airline
                     DataHandler.getAirline(airlineUUID).addFlugzeug(flugzeug);      //fügt das Flugzeug der Airline hinzu
                 }
-                else if (airlineUUID == ""){        //wenn keine Airline vorhanden ist, dann gehört das Flugzeug dem Hersteller
+                else if (airlineUUID == null){        //wenn keine Airline vorhanden ist, dann gehört das Flugzeug dem Hersteller
                     DataHandler.getHersteller(herstellerUUID).addZuverkaufendeFlugzeuge(flugzeug);
                 }
                 else {      //Wenn hier, dann ist die Airline noch nicht vorhanden. Sie muss zuerst noch erstellt werden
@@ -219,6 +222,9 @@ public class FlugzeugService {
                         }
                     }
 
+                    if (airlineUUID.equals("-")){
+                        airlineUUID = null;
+                    }
 
                     if (airlineUUID != null){
                         if (DataHandler.getAirline(airlineUUID) == null){

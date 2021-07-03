@@ -14,7 +14,7 @@ $(document).ready(function () {
     /**
      * listener for submitting the form
      */
-    $("#flugzeugeditForm").submit(saveBook);
+    $("#flugzeugeditForm").submit(saveFlugzeug);
 
     /**
      * listener for button [abbrechen], redirects to bookshelf
@@ -129,7 +129,7 @@ function showAirlines(airlines) {
 }
 
 
-function saveBook(form) {
+function saveFlugzeug(form) {
     form.preventDefault();
 
     $("#neueHerstellerUUID").val($("#hersteller").val());
