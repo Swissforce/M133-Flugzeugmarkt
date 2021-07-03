@@ -29,11 +29,22 @@ public class AirlineService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listAirlines(){
+    public Response listAirlines(
+            @CookieParam("token") String token
+    ){
+        int status;
+        String returnValue = "";
+
+        String[] rollen = {"admin", "wartung", "benutzer"};
+        status = CheckCookie.checkCookie(token, rollen);
+
+        if (status == 200){
+            returnValue = DataHandler.stringVonJSON(DataHandler.getAirlineMap());
+        }
 
         Response response = Response
-                .status(200)
-                .entity(DataHandler.stringVonJSON(DataHandler.getAirlineMap()))
+                .status(status)
+                .entity(returnValue)
                 .build();
         return response;
     }
@@ -48,29 +59,48 @@ public class AirlineService {
     @Path("check")
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkAirline(
-            @QueryParam("airlineUUID") String airlineUUID
+            @QueryParam("airlineUUID") String airlineUUID,
+            @CookieParam("token") String token
     ){
-        int status = 200;
-        Airline airline = null;
+        int status;
 
-        try {
-            UUID.fromString(airlineUUID);          //schaut, ob die UUID formal korrekt ist, wenn nicht, schmeists IllegalArgumentException
-            if (DataHandler.getAirline(airlineUUID) == null){     //schaut, ob die UUID mit einem Airlineobjekt referenziert ist
-                status = 404;       //Not found
-            } else {
-                airline = DataHandler.getAirline(airlineUUID);
+        String[] rollen = {"admin", "wartung"};
+        status = CheckCookie.checkCookie(token, rollen);
+
+        if (status == 200){
+            Airline airline = null;
+
+            try {
+                UUID.fromString(airlineUUID);          //schaut, ob die UUID formal korrekt ist, wenn nicht, schmeists IllegalArgumentException
+                if (DataHandler.getAirline(airlineUUID) == null){     //schaut, ob die UUID mit einem Airlineobjekt referenziert ist
+                    status = 404;       //Not found
+                } else {
+                    airline = DataHandler.getAirline(airlineUUID);
+                }
+            } catch (IllegalArgumentException e){
+                status = 400;       //Bad Request
             }
-        } catch (IllegalArgumentException e){
-            status = 400;       //Bad Request
+            finally {
+                Response response = Response
+                        .status(status)
+                        .entity(DataHandler.stringVonJSON(airline))
+                        .build();
+
+                return response;
+            }
         }
-        finally {
+        else {
             Response response = Response
                     .status(status)
-                    .entity(DataHandler.stringVonJSON(airline))
+                    .entity("")
                     .build();
 
             return response;
         }
+
+
+
+
     }
 
 
@@ -83,11 +113,16 @@ public class AirlineService {
     @Path("insert")
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertAirline(
-            @Valid @BeanParam Airline airline
+            @Valid @BeanParam Airline airline,
+            @CookieParam("token") String token
     ){
-        int status = 200;
+        int status;
 
-        DataHandler.insertAirline(airline);
+        status = CheckCookie.checkCookie(token, "admin");
+
+        if (status == 200){
+            DataHandler.insertAirline(airline);
+        }
 
         Response response = Response
                 .status(status)
@@ -110,34 +145,40 @@ public class AirlineService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateAirline(
             @FormParam("alteAirlineUUID") String airlineUUID,
-            @Valid @BeanParam Airline airline
+            @Valid @BeanParam Airline airline,
+            @CookieParam("token") String token
     ){
-        int status = 200;
+        int status;
 
-        try {
-            UUID.fromString(airlineUUID);
+        String[] rollen = {"admin", "wartung"};
+        status = CheckCookie.checkCookie(token, rollen);
 
-            if (DataHandler.getAirline(airlineUUID) != null){
-                if (airline.getAirlineUUID() != null){
-                    DataHandler.getAirline(airlineUUID).setAirlineUUID(airline.getAirlineUUID());
+        if (status == 200){
+            try {
+                UUID.fromString(airlineUUID);
+
+                if (DataHandler.getAirline(airlineUUID) != null){
+                    if (airline.getAirlineUUID() != null){
+                        DataHandler.getAirline(airlineUUID).setAirlineUUID(airline.getAirlineUUID());
+                    }
+                    if (airline.getGruendungsdatum() != null){
+                        DataHandler.getAirline(airlineUUID).setGruendungsdatum(airline.getGruendungsdatum());
+                    }
+                    if (airline.getName() != null){
+                        DataHandler.getAirline(airlineUUID).setName(airline.getName());
+                    }
+
+                    Airline alteAirline = DataHandler.getAirlineMap().remove(airlineUUID);      //damit sich der Key auch ändert
+                    DataHandler.insertAirline(alteAirline);
+
                 }
-                if (airline.getGruendungsdatum() != null){
-                    DataHandler.getAirline(airlineUUID).setGruendungsdatum(airline.getGruendungsdatum());
+                else {
+                    status = 404;   //Not found
                 }
-                if (airline.getName() != null){
-                    DataHandler.getAirline(airlineUUID).setName(airline.getName());
-                }
-
-                Airline alteAirline = DataHandler.getAirlineMap().remove(airlineUUID);      //damit sich der Key auch ändert
-                DataHandler.insertAirline(alteAirline);
-
             }
-            else {
-                status = 404;   //Not found
+            catch (IllegalArgumentException e){
+                status = 400;   //Bad Request
             }
-        }
-        catch (IllegalArgumentException e){
-            status = 400;   //Bad Request
         }
 
         Response response = Response
@@ -158,38 +199,42 @@ public class AirlineService {
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteAirline(
-            @QueryParam("airlineUUID") String airlineUUID
+            @QueryParam("airlineUUID") String airlineUUID,
+            @CookieParam("token") String token
     ){
-        int status = 200;
+        int status;
 
-        try {
-            UUID.fromString(airlineUUID);
+        status = CheckCookie.checkCookie(token, "admin");
 
-            if (DataHandler.getAirline(airlineUUID) != null){
+        if (status == 200){
+            try {
+                UUID.fromString(airlineUUID);
 
-                if (DataHandler.getAirline(airlineUUID).getFlugzeuge() != null){    //Wenn die Airline Flugzeuge hat
-                    for (Map.Entry<String,Flugzeug> flugzeug : DataHandler.getAirline(airlineUUID).getFlugzeuge().entrySet()){
-                        flugzeug.getValue().setAirline(null);       //Entfernt die Referenz vom Flugzeug zur Airline
+                if (DataHandler.getAirline(airlineUUID) != null){
+
+                    if (DataHandler.getAirline(airlineUUID).getFlugzeuge() != null){    //Wenn die Airline Flugzeuge hat
+                        for (Map.Entry<String,Flugzeug> flugzeug : DataHandler.getAirline(airlineUUID).getFlugzeuge().entrySet()){
+                            flugzeug.getValue().setAirline(null);       //Entfernt die Referenz vom Flugzeug zur Airline
+                        }
                     }
+
+                    DataHandler.rmAirline(airlineUUID);
                 }
-
-                DataHandler.rmAirline(airlineUUID);
+                else {
+                    status = 404;   //Not found
+                }
             }
-            else {
-                status = 404;   //Not found
+            catch (IllegalArgumentException e){
+                status = 400;   //Bad Request
             }
         }
-        catch (IllegalArgumentException e){
-            status = 400;   //Bad Request
-        }
-        finally {
-            Response response = Response
-                    .status(status)
-                    .entity("")
-                    .build();
 
-            return response;
-        }
+        Response response = Response
+                .status(status)
+                .entity("")
+                .build();
+
+        return response;
     }
 
 }

@@ -1,11 +1,20 @@
-[ {
-  "userUUID" : "92828c32-823e-4694-bbb0-9c7aaf7ff619",
-  "username" : "admin",
-  "password" : "admin",
-  "role" : "admin"
-} , {
-  "userUUID" : "4a3e753c-1d4d-477f-b381-640f54b5bbf8",
-  "username" : "gast",
-  "password" : "12345",
-  "role" : "gast"
-} ]
+[
+  {
+    "benutzerUUID" : "92828c32-823e-4694-bbb0-9c7aaf7ff619",
+    "benutzername" : "admin",
+    "passwort" : "12345",
+    "rolle" : "admin"
+  },
+  {
+    "benutzerUUID" : "bbd99b85-79ed-4fb5-9e95-fa2aaedbb074",
+    "benutzername" : "wartung",
+    "passwort" : "12345",
+    "rolle" : "wartung"
+  },
+  {
+    "benutzerUUID" : "4a3e753c-1d4d-477f-b381-640f54b5bbf8",
+    "benutzername" : "benutzer",
+    "passwort" : "12345",
+    "rolle" : "benutzer"
+  }
+]

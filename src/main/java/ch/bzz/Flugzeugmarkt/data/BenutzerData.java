@@ -33,8 +33,7 @@ public class BenutzerData {
         List<Benutzer> benutzerList = readJson();
 
         for (Benutzer entry: benutzerList) {
-            if (entry.getBenutzername().equals(benutzername) &&
-                    entry.getPasswort().equals(passwort)) {
+            if (entry.getBenutzername().equals(benutzername) && entry.getPasswort().equals(passwort)) {
                 benutzer = entry;
                 break;
             }

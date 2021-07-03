@@ -2,6 +2,7 @@ package ch.bzz.Flugzeugmarkt.service;
 
 import ch.bzz.Flugzeugmarkt.data.DataHandler;
 
+import javax.ws.rs.CookieParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -34,12 +35,22 @@ public class TestService {
     @GET
     @Path("restore")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response restore(){
-        DataHandler.restoreData();
+    public Response restore(
+            @CookieParam("token") String token
+    ){
+        int status;
+        String returnValue = "Nicht autorisiert";
+
+        status = CheckCookie.checkCookie(token, "admin");
+
+        if (status == 200){
+            DataHandler.restoreData();
+            returnValue = "Die Daten wurden zurueckgesetzt";
+        }
 
         Response response = Response
-                .status(200)
-                .entity("Die Daten wurden zurückgesetzt")
+                .status(status)
+                .entity(returnValue)
                 .build();
         return response;
 
