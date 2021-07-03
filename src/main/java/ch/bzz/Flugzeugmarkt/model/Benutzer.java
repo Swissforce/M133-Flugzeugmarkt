@@ -46,6 +46,13 @@ public class Benutzer {
         setBenutzerUUID(UUID.randomUUID().toString());
     }
 
+    /**
+     * Leerer Konstruktor
+     */
+    public Benutzer() {
+
+    }
+
 
     // Getter & Setter
 
