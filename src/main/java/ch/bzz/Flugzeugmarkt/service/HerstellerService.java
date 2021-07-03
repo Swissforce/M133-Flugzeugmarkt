@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Bietet die Services der Modelklasse Hersteller.java
+ * Bietet die Services der Modelklasse Hersteller.java an
  *
  * @author Martin Düppenbecker
  * @version 1.0

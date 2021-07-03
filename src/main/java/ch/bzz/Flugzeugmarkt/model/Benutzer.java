@@ -46,13 +46,6 @@ public class Benutzer {
         setBenutzerUUID(UUID.randomUUID().toString());
     }
 
-    /**
-     * Leerer Konstruktor mit automatischer Rollenzuweisung
-     */
-    public Benutzer(){
-        setRolle("gast");
-    }
-
 
     // Getter & Setter
 

@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Testklasse
+ * Diese Klasse bietet verschiedene Methoden an, die für Testing-Zwecke gedacht sind
  *
  * @author Martin Düppenbecker
  * @version 1.0

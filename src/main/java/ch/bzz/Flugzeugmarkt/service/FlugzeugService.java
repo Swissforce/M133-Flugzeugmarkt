@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * Bietet die Services der Modelklasse Flugzeug.java
+ * Bietet die Services der Modelklasse Flugzeug.java an
  *
  * @author Martin Düppenbecker
  * @version 1.0

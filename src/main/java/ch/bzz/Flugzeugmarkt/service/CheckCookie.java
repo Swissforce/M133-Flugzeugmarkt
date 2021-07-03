@@ -4,7 +4,7 @@ import ch.bzz.Flugzeugmarkt.data.BenutzerData;
 import ch.bzz.Flugzeugmarkt.model.Benutzer;
 
 /**
- * Beschreibung der Klasse
+ * Diese Klasse beinhaltet die Validierung der Cookies
  *
  * @author Martin Düppenbecker
  * @version 1.0
@@ -12,6 +12,7 @@ import ch.bzz.Flugzeugmarkt.model.Benutzer;
  */
 
 public class CheckCookie {
+
     /**
      * Schaut, ob der Token im Cookie die benötigte Rolle hat
      * @param token
