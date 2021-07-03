@@ -1,0 +1,11 @@
+[ {
+  "userUUID" : "92828c32-823e-4694-bbb0-9c7aaf7ff619",
+  "username" : "admin",
+  "password" : "admin",
+  "role" : "admin"
+} , {
+  "userUUID" : "4a3e753c-1d4d-477f-b381-640f54b5bbf8",
+  "username" : "gast",
+  "password" : "12345",
+  "role" : "gast"
+} ]
