@@ -10,7 +10,7 @@ $(document).ready(function () {
     loadFlugzeuge();
 
     /**
-     * listener for buttons within shelfForm
+     * Listener für Buttons in flugzeugListForm
      */
 
     $("#flugzeugListForm").on("click", "button", function () {
@@ -78,19 +78,9 @@ function showFlugzeuge(flugzeugData) {
     });
 }
 
-let tableTitle;
 
-function clearTable(table) {
-    while (table.hasChildNodes()) {
-        if (tableTitle == null && table.childElementCount == 1){
-            tableTitle = table.removeChild(table.lastChild);
-        }
-        else {
-            table.removeChild(table.lastChild);
-        }
-
-    }
-    table.append(tableTitle);
+function clearTable() {
+    $("#flugzeuge").find("tr:gt(0)").remove();
 }
 
 function deleteFlugzeug(flugzeugUUID) {
