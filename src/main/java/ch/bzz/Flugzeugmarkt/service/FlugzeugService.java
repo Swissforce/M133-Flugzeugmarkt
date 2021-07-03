@@ -265,8 +265,10 @@ public class FlugzeugService {
                             }
                         }
 
-                        if (airlineUUID.equals("-")){
-                            airlineUUID = null;
+                        if (airlineUUID != null){
+                            if (airlineUUID.equals("-")){
+                                airlineUUID = null;
+                            }
                         }
 
                         if (airlineUUID != null){

@@ -38,18 +38,23 @@ public class CheckCookie {
      */
     public static int checkCookie(String token, String[] rollen){
         int status = 403;
-        String decrypted = AESEncrypt.decrypt(token);
-        String values[] = decrypted.split(";");
 
-        Benutzer benutzer = BenutzerData.checkBenutzer(values[0], values[1]);
+        if (token != null){
+            String decrypted = AESEncrypt.decrypt(token);
+            String values[] = decrypted.split(";");
 
-        for (String rolle : rollen){
-            if (benutzer.getRolle().equals(rolle)){
-                status = 200;
-                break;
+            Benutzer benutzer = BenutzerData.checkBenutzer(values[0], values[1]);
+
+            for (String rolle : rollen){
+                if (benutzer.getRolle().equals(rolle)){
+                    status = 200;
+                    break;
+                }
             }
         }
-
+        else {
+            status = 401;
+        }
         return status;
     }
 }
